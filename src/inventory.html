@@ -127,7 +127,7 @@
 
   </nav>
 
-  <!-- SIDEBAR -->
+        <!-- SIDEBAR -->
   <aside id="sidebar" class="sidebar">
      <div class="logo-area">
       <a href="index.html" class="d-inline-flex"><img src="./assets/images/logo-icon.svg" alt="" width="24">
@@ -135,27 +135,40 @@
       </a>
     </div>
     <ul class="nav flex-column">
-      <li class="px-4 py-2"><small class="nav-text">Main</small></li>
+      <li class="px-4 py-2"><small class="nav-text"></small></li>
       <li><a class="nav-link active" href="index.html"><i class="ti ti-home"></i><span
             class="nav-text">Dashboard</span></a></li>
-      <li><a class="nav-link" href="inventory.html"><i class="ti ti-box-seam"></i><span
-            class="nav-text">Inventory</span></a></li>
-      <li><a class="nav-link" href="create-product.html"><i class="ti ti-plus"></i><span class="nav-text">Add
-            Product</span></a></li>
-    <li><a class="nav-link" href="reports.html"><i class="ti ti-receipt"></i><span class="nav-text">Reports</span></a>
-      </li>
-    <li><a class="nav-link" href="404-error.html"><i class="ti ti-alert-circle"></i><span class="nav-text">404 Error</span></a>
-      </li>
-      <li><a class="nav-link" href="docs.html"><i class="ti ti-file-text"></i><span class="nav-text">Docs</span></a></li>
+             <li><a class="nav-link" href="AddVendor.html"><i class="ti ti-users"></i><span
+            class="nav-text">Vendors</span></a></li>
+             <li><a class="nav-link" href="AddResturant.html"><i class="ti ti-building-store"></i><span
+            class="nav-text">Restaurant</span></a></li>
+    
+     
+      <li><a class="nav-link" href="AddCategory.html"><i class="ti ti-category"></i><span
+            class="nav-text">category</span></a></li>
+     
+       <li><a class="nav-link" href="AddFood.html"><i class="ti ti-salad"></i><span
+            class="nav-text">Food</span></a></li>
+     
+      <li><a class="nav-link" href="AddCoupons.html"><i class="ti ti-rosette-discount"></i><span
+            class="nav-text">coupons</span></a></li>
+     
+      <li><a class="nav-link" href="AddDeliveryMan.html"><i class="ti ti-truck-delivery"></i><span
+            class="nav-text">delivery Man</span></a></li>
+     
+    <li><a class="nav-link" href="order.html"><i class="ti ti-receipt">
 
-      <li class="px-4 pt-4 pb-2"><small class="nav-text">Account</small></li>
-      <li><a class="nav-link" href="signin.html"><i class="ti ti-logout"></i><span class="nav-text">Log in</span></a>
+    </i><span class="nav-text">orders</span></a>
       </li>
-      <li><a class="nav-link" href="signup.html"><i class="ti ti-user-plus"></i><span class="nav-text">Sign
-            up</span></a></li>
+   
+      <li class="px-4 pt-4 pb-2"><small class="nav-text">Account</small></li>
+      <li><a class="nav-link" href="signin.html"><i class="ti ti-logout"></i><span class="nav-text">LogOut</span></a>
+      </li>
+      
     </ul>
 
   </aside>
+
 
   <!-- MAIN CONTENT -->
   <main id="content" class="content py-10">
@@ -164,11 +177,11 @@
         <div class="col-12">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="">
-              <h1 class="fs-3 mb-1">Inventory</h1>
-              <p class="mb-0">Manage your product inventory</p>
+              <h1 class="fs-3 mb-1">Foods</h1>
+              <p class="mb-0">Manage your Foods</p>
             </div>
             <div>
-              <a href="create-product.html" class="btn btn-primary">Add Product</a>
+              <a href="AddFood.html" class="btn btn-primary">Add Foods</a>
             </div>
           </div>
         </div>
@@ -198,7 +211,7 @@
                 <tr>
                   <th>Image</th>
 
-                  <th>Code</th>
+                  <th>Type</th>
                   <th>Category</th>
                   <th>Brand</th>
                   <th>Price</th>
@@ -212,115 +225,20 @@
                   <td><a href=""><img src="./assets/images/product-1.png" alt="" class="avatar avatar-md rounded" /><span class="ms-3">Gaming Joy Stick</span></a>
                   </td>
 
-                  <td>PRD001</td>
+                  <td>Veg</td>
                   <td>Electronics</td>
                   <td>Brand Name</td>
                   <td>$99.99</td>
                   <td>pcs</td>
                   <td>150</td>
                   <td class="">
+                    <a href="#" class=""><i class="ti ti-eye"></i></a>
                     <a href="#" class=""><i class="ti ti-edit "></i></a>
-                    <a href="#" class="link-danger"><i class="ti ti-trash ms-2"></i></a>
+                    <a href="#" class="link-danger"><i class="ti ti-trash "></i></a>
+                    <a href="#" class=""><i class="ti ti-text-plus"></i></a>
                   </td>
                 </tr>
-                <tr class="align-middle">
-                  <td><a href=""><img src="./assets/images/product-2.png" alt="" class="avatar avatar-md rounded" /><span class="ms-3">Wireless Earphones</span></a>
-                  </td>
-                  <td>PRD002</td>
-                  <td>Electronics</td>
-                  <td>Tech Pro</td>
-                  <td>$89.99</td>
-                  <td>pcs</td>
-                  <td>320</td>
-                  <td class="">
-                    <a href="#" class=""><i class="ti ti-edit "></i></a>
-                    <a href="#" class="link-danger"><i class="ti ti-trash ms-2"></i></a>
-                  </td>
-                </tr>
-                <tr class="align-middle">
-                 <td><a href=""><img src="./assets/images/product-3.png" alt="" class="avatar avatar-md rounded" /><span class="ms-3">Smart Watch Pro</span></a>
-                  </td>
-                  <td>PRD003</td>
-                  <td>Electronics</td>
-                  <td>Tech Pro</td>
-                  <td>$98.00</td>
-                  <td>pcs</td>
-                  <td>200</td>
-                  <td class="">
-                    <a href="#" class=""><i class="ti ti-edit "></i></a>
-                    <a href="#" class="link-danger"><i class="ti ti-trash ms-2"></i></a>
-                  </td>
-                </tr>
-                <tr class="align-middle">
-                  <td><a href=""><img src="./assets/images/product-4.png" alt="" class="avatar avatar-md rounded" /><span class="ms-3">USB-C Fast Charger</span></a>
-                  </td>
-                  <td>PRD004</td>
-                  <td>Electronics</td>
-                  <td>Tech Pro</td>
-                  <td>$86.00</td>
-                  <td>pcs</td>
-                  <td>80</td>
-                  <td class="">
-                    <a href="#" class=""><i class="ti ti-edit "></i></a>
-                    <a href="#" class="link-danger"><i class="ti ti-trash ms-2"></i></a>
-                  </td>
-                </tr>
-                <tr class="align-middle">
-                  <td><a href=""><img src="./assets/images/product-5.png" alt="" class="avatar avatar-md rounded" /><span class="ms-3">Portable Bluetooth Speaker</span></a>
-                  </td>
-                  <td>PRD005</td>
-                  <td>Electronics</td>
-                  <td>Tech Pro</td>
-                  <td>$32.00</td>
-                  <td>pcs</td>
-                  <td>110</td>
-                  <td class="">
-                    <a href="#" class=""><i class="ti ti-edit "></i></a>
-                    <a href="#" class="link-danger"><i class="ti ti-trash ms-2"></i></a>
-                  </td>
-                </tr>
-                <tr class="align-middle">
-                  <td><a href=""><img src="./assets/images/product-6.png" alt="" class="avatar avatar-md rounded" /><span class="ms-3">Magic Keyboard</span></a>
-                  </td>
-                  <td>PRD006</td>
-                  <td>Electronics</td>
-                  <td>Tech Pro</td>
-                  <td>$49.00</td>
-                  <td>pcs</td>
-                  <td>10</td>
-                  <td class="">
-                    <a href="#" class=""><i class="ti ti-edit "></i></a>
-                    <a href="#" class="link-danger"><i class="ti ti-trash ms-2"></i></a>
-                  </td>
-                </tr>
-                <tr class="align-middle">
-                  <td><a href=""><img src="./assets/images/product-7.png" alt="" class="avatar avatar-md rounded" /><span class="ms-3">MacBook Pro 16"</span></a>
-                  </td>
-                  <td>PRD007</td>
-                  <td>Electronics</td>
-                  <td>Tech Pro</td>
-                  <td>$99.00</td>
-                  <td>pcs</td>
-                  <td>10</td>
-                  <td class="">
-                    <a href="#" class=""><i class="ti ti-edit "></i></a>
-                    <a href="#" class="link-danger"><i class="ti ti-trash ms-2"></i></a>
-                  </td>
-                </tr>
-                <tr class="align-middle">
-                  <td><a href=""><img src="./assets/images/product-8.png" alt="" class="avatar avatar-md rounded" /><span class="ms-3">Wireless Earphones</span></a>
-                  </td>
-                  <td>PRD008</td>
-                  <td>Electronics</td>
-                  <td>Tech Pro</td>
-                  <td>$109.00</td>
-                  <td>pcs</td>
-                  <td>200</td>
-                  <td class="">
-                    <a href="#" class=""><i class="ti ti-edit "></i></a>
-                    <a href="#" class="link-danger"><i class="ti ti-trash ms-2"></i></a>
-                  </td>
-                </tr>
+            
               </tbody>
               <tfoot class="">
 

@@ -7,3 +7,4 @@ import './custom.js';
 
 // Import SCSS
 import '../scss/style.scss';
+import '../css/index.css';
