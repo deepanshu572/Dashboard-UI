@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon_io/favicon-16x16.png">
   <link rel="manifest" href="./assets/images/favicon_io/site.webmanifest">
+
 </head>
 
 <body>
@@ -127,7 +128,7 @@
 
   </nav>
 
-       <!-- SIDEBAR -->
+      <!-- SIDEBAR -->
   <aside id="sidebar" class="sidebar">
      <div class="logo-area">
       <a href="index.html" class="d-inline-flex"><img src="./assets/images/logo-icon.svg" alt="" width="24">
@@ -138,9 +139,9 @@
       <li class="px-4 py-2"><small class="nav-text"></small></li>
       <li><a class="nav-link active" href="index.html"><i class="ti ti-home"></i><span
             class="nav-text">Dashboard</span></a></li>
-             <li><a class="nav-link" href="AddVendor.html"><i class="ti ti-users"></i><span
+             <li><a class="nav-link" href="AddVendor.html" ><i class="ti ti-users"></i><span
             class="nav-text">Vendors</span></a></li>
-             <li><a class="nav-link" href="AddResturant.html"><i class="ti ti-building-store"></i><span
+             <li><a class="nav-link" href="restuarants.html" onclick="return false;"><i class="ti ti-building-store"></i><span
             class="nav-text">Restaurant</span></a></li>
     
      
@@ -169,98 +170,288 @@
 
 
   <main id="content" class="content py-10 main-content">
-    <div class="container-fluid">
-   <div class="page-header">
-    <div>
-        <h1 class="page-title">Add Food</h1>
-        <p class="page-subtitle">Create and manage Food accounts</p>
-    </div>
+       <div class="container-fluid">
+     <div class="page-header">
+    <div class="page-header-left">
 
-    <a href="foods.html" class="page-action-btn">
-        <i class="ti ti-list me-1"></i>
-        Food List
-    </a>
-</div>
-      <div class="custom-form-card">
- 
-              <form id="addProductForm" onsubmit="handleProduct(event); return false;">
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="productName" class="form-label">Food Name</label>
-                    <input type="text" class="form-control" id="productName" placeholder="Enter food name" required>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="productFoodType" class="form-label">Food Type</label>
-                 <select class="form-select" id="productFoodType" required>
-                    <option value="">Select Food Type</option>
-                    <option value="nonveg">nonveg</option>
-                    <option value="veg">veg</option>
-                    <option value="drinks">drinks</option>
-                  </select>                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label for="productPrice" class="form-label">MRP</label>
-                    <input type="number" class="form-control" id="productPrice" placeholder="0.00" step="0.01" required>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="productSellingPrice" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="productSellingPrice" placeholder="0.00" required>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                    <label for="productPreparationTime" class="form-label">Prepration Time</label>
-                    <input type="number" class="form-control" id="productPreparationTime" placeholder="0.00" required>
-                  </div>
-                <div class="col-md-6 mb-3">
-                    <label for="productCalories" class="form-label">Calaroies</label>
-                    <input type="number" class="form-control" id="productCalories" placeholder="0.00" required>
-                  </div>
-                </div>
+        <a href="javascript:history.back()" class="back-btn">
+            <i class="ti ti-arrow-left"></i>
+        </a>
 
-                <div class="mb-3">
-                  <label for="productResturant" class="form-label">Resturant</label>
-                  <select class="form-select" id="productResturant" required>
-                    
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="productCategory" class="form-label">Category</label>
-                  <select class="form-select" id="productCategory" required>
-                    
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label for="productImage" class="form-label">Product Image</label>
-                  <input type="file" class="form-control" id="productImage" accept="image/*" required>
-                </div>
-              
-                <div class="mb-3">
-                  <label for="productDescription" class="form-label">Description</label>
-                  <textarea class="form-control" id="productDescription" rows="4"
-                    placeholder="Enter product description"></textarea>
-                </div>
-                <div class="admin-form-actions">
-            <button type="submit" class="admin-btn admin-btn-primary">
-                <i class="ti ti-device-floppy me-1"></i>
-                Add Food
-            </button>
-
-            <button type="reset" class="admin-btn admin-btn-secondary">
-                Clear
-            </button>
+        <div>
+            <h1 class="page-title">Restaurant</h1>
+            <p class="page-subtitle">Manage your Restaurant and account details</p>
         </div>
 
-              </form>
-         
-      </div>
+    </div>
+</div>
+    <div class="table-toolbar">
 
-    
+    <div class="search-box">
+        <i class="ti ti-search"></i>
+        <input type="text" placeholder="Search restuarants...">
+    </div>
+
+    <div class="toolbar-actions">
+
+        <button class="toolbar-btn">
+            <i class="ti ti-filter"></i>
+            Filter
+        </button>
+
+        <button class="toolbar-btn">
+            <i class="ti ti-file-excel"></i>
+            Excel
+        </button>
+
+        <button class="toolbar-btn">
+            <i class="ti ti-file-pdf"></i>
+            PDF
+        </button>
+
+    </div>
+
+</div>
+<div class="custom-table-card">
+
+    <div class="table-responsive">
+        <table class="table custom-table align-middle mb-0">
+
+            <thead>
+                <tr>
+                  <th>S No.</th>
+<th>Restaurant Name</th>
+<th>Address</th>
+<th>Email</th>
+<th>Phone</th>
+<th>City</th>
+<th>State</th>
+<th>Pincode</th>
+<th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="resturantDataTable">
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+  
+
+
+
 
     </div>
   </main>
 
+<div class="modal fade" id="ResturantViewModal" tabindex="-1" aria-labelledby="ResturantViewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg vendorModal">
+    <div class="modal-content">
+     
+    <div class="modal-body">
+    <div class="vendor-profile">
+
+        <div class="profile-header">
+            <div class="profile-avatar">
+                SG
+            </div>
+
+            <div class="profile-info">
+                <h2>Spice Garden Bistro</h2>
+                <p>Restaurant • Ranchi</p>
+                <span class="badge active">Open Now</span>
+            </div>
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-card">
+                <span>Email</span>
+                <h4>contact@spicegardenbistro.com</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Phone</span>
+                <h4>+91 98765 43210</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Address</span>
+                <h4>24 MG Road</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>City</span>
+                <h4>Ranchi</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>State</span>
+                <h4>Jharkhand</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Pincode</span>
+                <h4>834001</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Minimum Order</span>
+                <h4>₹0</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Delivery Charge</span>
+                <h4>₹0</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Average Rating</span>
+                <h4>0.0 ★</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Total Reviews</span>
+                <h4>0 Reviews</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Status</span>
+                <h4>Approved</h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Created On</span>
+                <h4>21 May 2026</h4>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal fade vendor-modal" id="editResturantModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Update Restuarant</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+<div class="modal-body">
+
+    <form id="restaurantForm">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>Restaurant Name</label>
+                    <input type="text" id="restaurantName" class="form-control"
+                        value="Spice Garden Bistro">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>Email Address</label>
+                    <input type="email" id="email" class="form-control"
+                        value="contact@spicegardenbistro.com">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>Phone Number</label>
+                    <input type="text" id="phone" class="form-control"
+                        value="+91 98765 43210">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>Address</label>
+                    <input type="text" id="address" class="form-control"
+                        value="24 MG Road">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>City</label>
+                    <input type="text" id="city" class="form-control"
+                        value="Ranchi">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>State</label>
+                    <input type="text" id="state" class="form-control"
+                        value="Jharkhand">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>Pincode</label>
+                    <input type="text" id="pincode" class="form-control"
+                        value="834001">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>Minimum Order Amount</label>
+                    <input type="number" id="minimumOrder" class="form-control"
+                        value="0">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>Delivery Charge</label>
+                    <input type="number" id="deliveryCharge" class="form-control"
+                        value="0">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="field-box">
+                    <label>Status</label>
+                    <select id="status" class="form-select">
+                        <option selected>Approved</option>
+                        <option>Pending</option>
+                        <option>Rejected</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="vendor-btns">
+            <button type="submit" class="btn-save">
+                Update Restaurant
+            </button>
+
+            <button type="reset" class="btn-clear">
+                Reset
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+        </div>
+    </div>
+</div>
 
 
 
@@ -276,12 +467,9 @@
   <script src="./assets/js/jquery.js"></script>
 
   <script src="./assets/js/script.js"></script>
-
   <script>
     getResturant();
-    getCategory();
   </script>
-
 </body>
 
 </html>

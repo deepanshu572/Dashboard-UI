@@ -1,4 +1,5 @@
 let apiUrl = "http://localhost/ITS_Food_Backend/admin/api/";
+let imgUrl="http://localhost/ITS_Food_Backend/admin/"
 console.log("Done");
 
 // vendor crud
@@ -37,7 +38,62 @@ function handleVendor(e) {
   });
 }
 function getVendor() {
-  //code
+   $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getVendor",
+    },
+    success: function (response) {
+      console.log(response);
+      if (response.status == "success") {
+        console.log(response.message);
+
+        let vendorHtml = '';
+        let i=0;
+        response.data.map((item) => {
+          i++;
+          vendorHtml += `  <tr class="align-middle " >
+
+            <td>${i}</td>
+            <td>${item.restaurant_name}</td>
+            <td>${item.owner_name}</td>
+            <td>${item.email}</td>
+            <td>${item.phone}</td>
+            <td>${item.password}</td>
+            <td>${item.bank_name}</td>
+            <td>${item.account_number}</td>
+
+           
+                 <td>
+    <div class="action-buttons">
+
+        <a data-bs-toggle="modal" data-bs-target="#exampleModal" href="#" class="action-btn view-btn">
+            <i class="ti ti-eye"></i>
+        </a>
+
+        <a data-bs-toggle="modal" data-bs-target="#addVendorModal" href="#" class="action-btn edit-btn">
+            <i class="ti ti-edit"></i>
+        </a>
+
+        <a href="#" class="action-btn delete-btn">
+            <i class="ti ti-trash"></i>
+        </a>
+
+    </div>
+</td> 
+            </tr>`;
+        });
+        $("#vendorData").append(vendorHtml);
+      } else {
+        console.log(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.log("AJAX Err : " + error);
+    },
+  });
 }
 function editVendor() {
   //code
@@ -106,13 +162,53 @@ function getResturant() {
       console.log(response);
       if (response.status == "success") {
         console.log(response.message);
+        let i=0;
 
         let resturantHtml = '<option value="">Select Resturant</option>';
+        let resturantTableHtml = '';
         response.data.map((item) => {
           resturantHtml += ` <option value="${item.id}">${item.name}</option>`;
+
+
+           resturantTableHtml += `  <tr class="align-middle " >
+
+           <td>${i + 1}</td>
+    <td>${item.name}</td>
+    <td>${item.address}</td>
+    <td>${item.email}</td>
+    <td>${item.phone}</td>
+    <td>${item.city}</td>
+    <td>${item.state}</td>
+    <td>${item.pincode}</td>
+
+           
+                 <td>
+    <div class="action-buttons">
+
+        <a data-bs-toggle="modal" data-bs-target="#ResturantViewModal" href="#" class="action-btn view-btn">
+            <i class="ti ti-eye"></i>
+        </a>
+
+        <a data-bs-toggle="modal" data-bs-target="#editResturantModal" href="#" class="action-btn edit-btn">
+            <i class="ti ti-edit"></i>
+        </a>
+
+        <a href="#" class="action-btn delete-btn">
+            <i class="ti ti-trash"></i>
+        </a>
+
+    </div>
+</td> 
+            </tr>`;
         });
+
+
+        
+
+
         $("#resturantData").append(resturantHtml);
         $("#productResturant").append(resturantHtml);
+        $("#resturantDataTable").append(resturantTableHtml);
       } else {
         console.log(response.message);
       }
@@ -172,11 +268,61 @@ function getCategory() {
       console.log(response);
       if (response.status == "success") {
         console.log(response.message);
-
+        let i=0;
         let categoryHtml = '<option value="">Select Category</option>';
+        let categoryTableHtml = '';
         response.data.map((item) => {
           categoryHtml += ` <option value="${item.id}">${item.name}</option>`;
+          categoryTableHtml += `
+<tr class="align-middle">
+
+    <td>${i + 1}</td>
+
+    <td>${item.name}</td>
+
+    <td>
+        <img src="${imgUrl+item.image}" 
+             style="width:50px;height:50px;border-radius:8px;object-fit:cover;">
+    </td>
+
+    <td>
+        <img src="${imgUrl+item.cover_image}" 
+             style="width:90px;height:50px;border-radius:8px;object-fit:cover;">
+    </td>
+
+    <td>${item.sort_order}</td>
+
+    <td>
+        <span class="badge ${item.status == 'active' ? 'bg-success' : 'bg-danger'}">
+            ${item.status}
+        </span>
+    </td>
+
+    <td>${item.created_at}</td>
+
+    <td>
+        <div class="action-buttons">
+
+            <a data-bs-toggle="modal" data-bs-target="#CategoryViewModal"
+               href="#" class="action-btn view-btn">
+                <i class="ti ti-eye"></i>
+            </a>
+
+            <a data-bs-toggle="modal" data-bs-target="#editCategoryModal"
+               href="#" class="action-btn edit-btn">
+                <i class="ti ti-edit"></i>
+            </a>
+
+            <a href="#" class="action-btn delete-btn">
+                <i class="ti ti-trash"></i>
+            </a>
+
+        </div>
+    </td>
+
+</tr>`;
         });
+        $("#CategoryDataTable").append(categoryTableHtml);
         $("#productCategory").append(categoryHtml);
       } else {
         console.log(response.message);

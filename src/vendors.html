@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Inventory - InApp Inventory Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./assets/images/favicon_io/site.webmanifest">
+
+</head>
+
+<body>
+  <div id="overlay" class="overlay"></div>
+  <!-- TOPBAR -->
+  <nav id="topbar" class="navbar bg-white border-bottom fixed-top topbar px-3">
+    <button id="toggleBtn" class="d-none d-lg-inline-flex btn btn-light btn-icon btn-sm ">
+      <i class="ti ti-layout-sidebar-left-expand"></i>
+    </button>
+
+    <!-- MOBILE -->
+    <button id="mobileBtn" class="btn btn-light btn-icon btn-sm d-lg-none me-2">
+      <i class="ti ti-layout-sidebar-left-expand"></i>
+    </button>
+    <div>
+      <!-- Navbar nav -->
+       <ul class="list-unstyled d-flex align-items-center mb-0 gap-1">
+        <!-- Pages link -->
+
+        <!-- Bell icon -->
+        <li>
+          <a class="position-relative btn-icon btn-sm btn-light btn rounded-circle" data-bs-toggle="dropdown"
+            aria-expanded="false" href="#" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-bell">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+              <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+            </svg>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-2 ms-n2">
+              2
+              <span class="visually-hidden">unread messages</span>
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end dropdown-menu-md p-0">
+            <ul class="list-unstyled p-0 m-0">
+              <li class="p-3 border-bottom ">
+                <div class="d-flex gap-3">
+                  <img src="./assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-sm rounded-circle" />
+                  <div class="flex-grow-1 small">
+                    <p class="mb-0">New order received</p>
+                    <p class="mb-1">Order #12345 has been placed</p>
+                    <div class="text-secondary">5 minutes ago</div>
+                  </div>
+                </div>
+              </li>
+              <li class="p-3 border-bottom ">
+                <div class="d-flex gap-3">
+                  <img src="./assets/images/avatar/avatar-4.jpg" alt="" class="avatar avatar-sm rounded-circle" />
+                  <div class="flex-grow-1 small">
+                    <p class="mb-0">New user registered</p>
+                    <p class="mb-1">User @john_doe has signed up</p>
+                    <div class="text-secondary">30 minutes ago</div>
+                  </div>
+              </li>
+
+              <li class="p-3 border-bottom">
+                <div class="d-flex gap-3">
+                  <img src="./assets/images/avatar/avatar-2.jpg" alt="" class="avatar avatar-sm rounded-circle" />
+                  <div class="flex-grow-1 small">
+                    <p class="mb-0">Payment confirmed</p>
+                    <p class="mb-1">Payment of $299 has been received</p>
+                    <div class="text-secondary">1 hour ago</div>
+                  </div>
+                </div>
+              </li>
+              <li class="px-4 py-3 text-center">
+                <a href="#" class="text-primary ">View all notifications</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- Dropdown -->
+        <li class="ms-3 dropdown">
+          <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="./assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-sm rounded-circle" />
+          </a>
+          <div class="dropdown-menu dropdown-menu-end p-0" style="min-width: 200px;">
+            <div>
+              <div class="d-flex gap-3 align-items-center border-dashed border-bottom px-3 py-3">
+                <img src="./assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle" />
+                <div>
+                  <h4 class="mb-0 small">Shrina Tesla</h4>
+                  <p class="mb-0  small">@imshrina</p>
+                </div>
+              </div>
+              <div class="p-3 d-flex flex-column gap-1 small lh-lg">
+                <a href="#!" class="">
+
+                  <span>Home</span>
+                </a>
+                <a href="#!" class="">
+
+                  <span> Inbox</span>
+                </a>
+                <a href="#!" class="">
+
+                  <span> Chat</span>
+                </a>
+                <a href="#!" class="">
+
+                  <span> Activity</span>
+                </a>
+                <a href="#!" class="">
+
+                  <span> Account Settings</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+      <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar">
+     <div class="logo-area">
+      <a href="index.html" class="d-inline-flex"><img src="./assets/images/logo-icon.svg" alt="" width="24">
+        <span class="logo-text ms-2"> <img src="./assets/images/logo.svg" alt=""></span>
+      </a>
+    </div>
+    <ul class="nav flex-column">
+      <li class="px-4 py-2"><small class="nav-text"></small></li>
+      <li><a class="nav-link active" href="index.html"><i class="ti ti-home"></i><span
+            class="nav-text">Dashboard</span></a></li>
+             <li><a class="nav-link" href="vendors.html" onclick="return false;"><i class="ti ti-users"></i><span
+            class="nav-text">Vendors</span></a></li>
+             <li><a class="nav-link" href="AddResturant.html"><i class="ti ti-building-store"></i><span
+            class="nav-text">Restaurant</span></a></li>
+    
+     
+      <li><a class="nav-link" href="AddCategory.html"><i class="ti ti-category"></i><span
+            class="nav-text">category</span></a></li>
+     
+       <li><a class="nav-link" href="AddFood.html"><i class="ti ti-salad"></i><span
+            class="nav-text">Food</span></a></li>
+     
+      <li><a class="nav-link" href="AddCoupons.html"><i class="ti ti-rosette-discount"></i><span
+            class="nav-text">coupons</span></a></li>
+     
+      <li><a class="nav-link" href="AddDeliveryMan.html"><i class="ti ti-truck-delivery"></i><span
+            class="nav-text">delivery Man</span></a></li>
+     
+    <li><a class="nav-link" href="order.html"><i class="ti ti-receipt"></i><span class="nav-text">order</span></a>
+      </li>
+   
+      <li class="px-4 pt-4 pb-2"><small class="nav-text">Account</small></li>
+      <li><a class="nav-link" href="signin.html"><i class="ti ti-logout"></i><span class="nav-text">LogOut</span></a>
+      </li>
+      
+    </ul>
+
+  </aside>
+
+
+  <main id="content" class="content py-10 main-content">
+       <div class="container-fluid">
+     <div class="page-header">
+    <div class="page-header-left">
+
+        <a href="javascript:history.back()" class="back-btn">
+            <i class="ti ti-arrow-left"></i>
+        </a>
+
+        <div>
+            <h1 class="page-title">Vendor</h1>
+            <p class="page-subtitle">Manage your vendors and account details</p>
+        </div>
+
+    </div>
+</div>
+    <div class="table-toolbar">
+
+    <div class="search-box">
+        <i class="ti ti-search"></i>
+        <input type="text" placeholder="Search vendor...">
+    </div>
+
+    <div class="toolbar-actions">
+
+        <button class="toolbar-btn">
+            <i class="ti ti-filter"></i>
+            Filter
+        </button>
+
+        <button class="toolbar-btn">
+            <i class="ti ti-file-excel"></i>
+            Excel
+        </button>
+
+        <button class="toolbar-btn">
+            <i class="ti ti-file-pdf"></i>
+            PDF
+        </button>
+
+    </div>
+
+</div>
+<div class="custom-table-card">
+
+    <div class="table-responsive">
+        <table class="table custom-table align-middle mb-0">
+
+            <thead>
+                <tr>
+                    <th>S No.</th>
+                    <th>Restaurant</th>
+                    <th>Vendor</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Password</th>
+                    <th>Bank Name</th>
+                    <th>Account No</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="vendorData">
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+  
+
+
+
+
+    </div>
+  </main>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg vendorModal">
+    <div class="modal-content">
+     
+      <div class="modal-body">
+       <div class="vendor-profile">
+
+    <div class="profile-header">
+        <div class="profile-avatar">
+            DK
+        </div>
+
+        <div class="profile-info">
+            <h2>Deepanshu Kumar</h2>
+            <p>Owner • Spice Handed Shop</p>
+            <span class="badge active">Active Vendor</span>
+        </div>
+    </div>
+
+    <div class="details-grid">
+
+        <div class="detail-card">
+            <span>Email</span>
+            <h4>deepanshu@gmail.com</h4>
+        </div>
+
+        <div class="detail-card">
+            <span>Phone</span>
+            <h4>9876543210</h4>
+        </div>
+
+        <div class="detail-card">
+            <span>Restaurant</span>
+            <h4>Spice Handed Shop</h4>
+        </div>
+
+        <div class="detail-card">
+            <span>Bank Name</span>
+            <h4>State Bank of India</h4>
+        </div>
+
+        <div class="detail-card">
+            <span>Account Number</span>
+            <h4>XXXX XXXX 4567</h4>
+        </div>
+
+        <div class="detail-card">
+            <span>IFSC Code</span>
+            <h4>SBIN0001234</h4>
+        </div>
+
+        <div class="detail-card">
+            <span>UPI ID</span>
+            <h4>deepanshu@upi</h4>
+        </div>
+
+        <div class="detail-card">
+            <span>GST Number</span>
+            <h4>GST123456789</h4>
+        </div>
+
+        <div class="detail-card">
+            <span>PAN Number</span>
+            <h4>ABCDE1234F</h4>
+        </div>
+
+        <div class="detail-card">
+            <span>Created On</span>
+            <h4>30 May 2026</h4>
+        </div>
+
+    </div>
+
+</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal fade vendor-modal" id="addVendorModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Vendor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form id="addVendorForm">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>Restaurant</label>
+                                <select id="resturantData" class="form-select"></select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>Owner Name</label>
+                                <input type="text" id="ownerName" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>Email Address</label>
+                                <input type="email" id="email" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>Phone Number</label>
+                                <input type="number" id="phone" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>Password</label>
+                                <input type="password" id="password" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>Bank Name</label>
+                                <input type="text" id="bankName" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>Account Number</label>
+                                <input type="number" id="accountNumber" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>IFSC Code</label>
+                                <input type="text" id="ifscCode" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>UPI ID</label>
+                                <input type="text" id="upiId" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>GST Number</label>
+                                <input type="text" id="gstNumber" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="field-box">
+                                <label>PAN Number</label>
+                                <input type="text" id="panNumber" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="vendor-btns">
+                        <button type="submit" class="btn-save">
+                            Add Vendor
+                        </button>
+
+                        <button type="reset" class="btn-clear">
+                            Clear
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+  <!-- Bootstrap JS -->
+   <script src="./assets/js/main.js" type="module"></script>
+  <script src="./assets/js/jquery.js"></script>
+
+  <script src="./assets/js/script.js"></script>
+  <script>
+    getVendor();
+  </script>
+</body>
+
+</html>
