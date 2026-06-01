@@ -254,13 +254,13 @@
        <div class="vendor-profile">
 
     <div class="profile-header">
-        <div class="profile-avatar">
+        <div class="profile-avatar" id="avatar">
             DK
         </div>
 
         <div class="profile-info">
-            <h2>Deepanshu Kumar</h2>
-            <p>Owner • Spice Handed Shop</p>
+            <h2 id="nameTop">Deepanshu Kumar</h2>
+            <p>Owner • <span id="shopNameView"></span></p>
             <span class="badge active">Active Vendor</span>
         </div>
     </div>
@@ -269,52 +269,52 @@
 
         <div class="detail-card">
             <span>Email</span>
-            <h4>deepanshu@gmail.com</h4>
+            <h4 id="emailView"></h4>
         </div>
 
         <div class="detail-card">
             <span>Phone</span>
-            <h4>9876543210</h4>
+            <h4 id="phoneView"></h4>
         </div>
 
         <div class="detail-card">
             <span>Restaurant</span>
-            <h4>Spice Handed Shop</h4>
+            <h4 id="resturantView"></h4>
         </div>
 
         <div class="detail-card">
             <span>Bank Name</span>
-            <h4>State Bank of India</h4>
+            <h4 id="bankView"></h4>
         </div>
 
         <div class="detail-card">
             <span>Account Number</span>
-            <h4>XXXX XXXX 4567</h4>
+            <h4 id="accountView"></h4>
         </div>
 
         <div class="detail-card">
             <span>IFSC Code</span>
-            <h4>SBIN0001234</h4>
+            <h4 id="ifcsView"></h4>
         </div>
 
         <div class="detail-card">
             <span>UPI ID</span>
-            <h4>deepanshu@upi</h4>
+            <h4 id="upiIdView"></h4>
         </div>
 
         <div class="detail-card">
             <span>GST Number</span>
-            <h4>GST123456789</h4>
+            <h4 id="gstView"></h4>
         </div>
 
         <div class="detail-card">
             <span>PAN Number</span>
-            <h4>ABCDE1234F</h4>
+            <h4 id="panView"></h4>
         </div>
 
         <div class="detail-card">
             <span>Created On</span>
-            <h4>30 May 2026</h4>
+            <h4 id="createdView"></h4>
         </div>
 
     </div>
@@ -331,20 +331,29 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title">Add New Vendor</h5>
+                <h5 class="modal-title">Update Vendor</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
 
-                <form id="addVendorForm">
+                <form id="addVendorForm" class="reuse_vendor" onsubmit="updateVendor(event); return false;">
 
+                  <input type="number" id="idHold" hidden>
                     <div class="row">
-
+                      <div class="field-box disabled">
+                          <label>Selected Restaurant</label>
+                       <input type="text" id="restaurantName" class="form-control mb-2" disabled readonly>
+                       <input type="number" id="restaurantId" hidden>
+                       </div>
                         <div class="col-md-6">
+                          
                             <div class="field-box">
-                                <label>Restaurant</label>
-                                <select id="resturantData" class="form-select"></select>
+                                <label>Change Restaurant</label>
+                                
+                                <select id="resturantData" class="form-select">
+
+                                </select>
                             </div>
                         </div>
 
@@ -422,7 +431,7 @@
 
                     <div class="vendor-btns">
                         <button type="submit" class="btn-save">
-                            Add Vendor
+                            Update Vendor
                         </button>
 
                         <button type="reset" class="btn-clear">
@@ -454,6 +463,7 @@
   <script src="./assets/js/script.js"></script>
   <script>
     getVendor();
+    getResturant();
   </script>
 </body>
 

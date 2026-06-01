@@ -1,5 +1,5 @@
 let apiUrl = "http://localhost/ITS_Food_Backend/admin/api/";
-let imgUrl="http://localhost/ITS_Food_Backend/admin/"
+let imgUrl = "http://localhost/ITS_Food_Backend/admin/";
 console.log("Done");
 
 // vendor crud
@@ -38,7 +38,7 @@ function handleVendor(e) {
   });
 }
 function getVendor() {
-   $.ajax({
+  $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -50,10 +50,12 @@ function getVendor() {
       if (response.status == "success") {
         console.log(response.message);
 
-        let vendorHtml = '';
-        let i=0;
+        let vendorHtml = "";
+        let i = 0;
         response.data.map((item) => {
+          $("#restaurantId").val(item.restaurant_id);
           i++;
+
           vendorHtml += `  <tr class="align-middle " >
 
             <td>${i}</td>
@@ -69,15 +71,15 @@ function getVendor() {
                  <td>
     <div class="action-buttons">
 
-        <a data-bs-toggle="modal" data-bs-target="#exampleModal" href="#" class="action-btn view-btn">
+        <a data-bs-toggle="modal"  onclick='actionVendor(${JSON.stringify(item)}, "view")' data-bs-target="#exampleModal" href="#" class="action-btn view-btn">
             <i class="ti ti-eye"></i>
         </a>
 
-        <a data-bs-toggle="modal" data-bs-target="#addVendorModal" href="#" class="action-btn edit-btn">
+        <a data-bs-toggle="modal" onclick='actionVendor(${JSON.stringify(item)}, "edit")' data-bs-target="#addVendorModal" href="#" class="action-btn edit-btn">
             <i class="ti ti-edit"></i>
         </a>
 
-        <a href="#" class="action-btn delete-btn">
+        <a href="#" onclick='deleteVendor(${JSON.stringify(item)})' class="action-btn delete-btn">
             <i class="ti ti-trash"></i>
         </a>
 
@@ -85,7 +87,8 @@ function getVendor() {
 </td> 
             </tr>`;
         });
-        $("#vendorData").append(vendorHtml);
+
+        $("#vendorData").html(vendorHtml);
       } else {
         console.log(response.message);
       }
@@ -95,13 +98,101 @@ function getVendor() {
     },
   });
 }
-function editVendor() {
-  //code
+
+function actionVendor(data, type) {
+  if (type == "edit") {
+    $("#idHold").val(data.id);
+    $("#restaurantName").val(data.restaurant_name);
+    $("#ownerName").val(data.owner_name);
+    $("#email").val(data.email);
+    $("#phone").val(data.phone);
+    $("#password").val(data.password);
+    $("#bankName").val(data.bank_name);
+    $("#accountNumber").val(data.account_number);
+    $("#ifscCode").val(data.ifsc_code);
+    $("#upiId").val(data.upi_id);
+    $("#gstNumber").val(data.gst_number);
+    $("#panNumber").val(data.pan_number);
+  } else {
+    let avatar = data.owner_name
+      .split(" ")
+      .map((word) => word.charAt(0))
+      .join("")
+      .toUpperCase();
+    $("#avatar").html(avatar);
+    $("#nameTop").html(data.owner_name);
+    $("#emailView").html(data.email || "-");
+    $("#phoneView").html(data.phone || "-");
+    $("#shopNameView").html(data.restaurant_name || "-");
+    $("#resturantView").html(data.restaurant_name || "-");
+    $("#bankView").html(data.bank_name || "-");
+    $("#accountView").html(data.account_number || "-");
+    $("#ifcsView").html(data.ifsc_code || "-");
+    $("#upiIdView").html(data.upi_id || "-");
+    $("#gstView").html(data.gst_number || "-");
+    $("#panView").html(data.pan_number || "-");
+    $("#createdView").html(data.created_at || "-");
+  }
 }
-function updateVendor() {
-  //code
+
+function updateVendor(e) {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append("type", "updateVendor");
+  formData.append("id", $("#idHold").val());
+  formData.append("rid", $("#restaurantId").val());
+  formData.append("owner_name", $("#ownerName").val());
+  formData.append("email", $("#email").val());
+  formData.append("phone", $("#phone").val());
+  formData.append("password", $("#password").val());
+  formData.append("bank_name", $("#bankName").val());
+  formData.append("account_number", $("#accountNumber").val());
+  formData.append("ifsc_code", $("#ifscCode").val());
+  formData.append("upi_id", $("#upiId").val());
+  formData.append("gst_number", $("#gstNumber").val());
+  formData.append("pan_number", $("#panNumber").val());
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: formData,
+    success: function (response) {
+      if (response.status == "success") {
+        $("#addVendorForm")[0].reset();
+        $("#addVendorModal").modal("hide");
+        getVendor();
+        alert(response.message);
+      } else {
+        console.log(response.message);
+      }
+    },
+  });
 }
-function deleteVendor() {
+
+$("#resturantData").on("change", function () {
+  let name = $(this).find("option:selected").text();
+  $("#restaurantName").val(name);
+  $("#restaurantId").val($(this).val());
+});
+
+function deleteVendor(data) {
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "deleteVendor",
+      id: data.id,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+        console.log(response);
+      } else {
+        console.log(response.message);
+      }
+    },
+  });
   //code
 }
 
@@ -162,53 +253,52 @@ function getResturant() {
       console.log(response);
       if (response.status == "success") {
         console.log(response.message);
-        let i=0;
+        let i = 0;
 
         let resturantHtml = '<option value="">Select Resturant</option>';
-        let resturantTableHtml = '';
+        let resturantTableHtml = "";
         response.data.map((item) => {
           resturantHtml += ` <option value="${item.id}">${item.name}</option>`;
 
-
-           resturantTableHtml += `  <tr class="align-middle " >
+          resturantTableHtml += `  <tr class="align-middle " >
 
            <td>${i + 1}</td>
-    <td>${item.name}</td>
-    <td>${item.address}</td>
-    <td>${item.email}</td>
-    <td>${item.phone}</td>
-    <td>${item.city}</td>
-    <td>${item.state}</td>
-    <td>${item.pincode}</td>
+          <td>${item.name}</td>
+          <td>${item.address}</td>
+          <td>${item.email}</td>
+          <td>${item.phone}</td>
+          <td>${item.city}</td>
+          <td>${item.state}</td>
+          <td>${item.pincode}</td>
+          <td><span class="  ${item.status == "approved" && "approved"}  ${item.status == "pending" && "pending"}  ${item.status == "rejected" && "reject"} ${item.status == "blocked" && "blocked"} badge">
+            ${item.status}
+        </span></td>
 
            
+        
                  <td>
-    <div class="action-buttons">
+         <div class="action-buttons">
 
-        <a data-bs-toggle="modal" data-bs-target="#ResturantViewModal" href="#" class="action-btn view-btn">
+        <a data-bs-toggle="modal"  onclick='actionResturant(${JSON.stringify(item)}, "view")'  data-bs-target="#ResturantViewModal" href="#" class="action-btn view-btn">
             <i class="ti ti-eye"></i>
         </a>
 
-        <a data-bs-toggle="modal" data-bs-target="#editResturantModal" href="#" class="action-btn edit-btn">
+        <a data-bs-toggle="modal"  onclick='actionResturant(${JSON.stringify(item)}, "edit")' data-bs-target="#editResturantModal" href="#" class="action-btn edit-btn">
             <i class="ti ti-edit"></i>
         </a>
 
-        <a href="#" class="action-btn delete-btn">
+         <a href="#" onclick='deleteResturant(${JSON.stringify(item)})' class="action-btn delete-btn">
             <i class="ti ti-trash"></i>
         </a>
 
-    </div>
-</td> 
+          </div>
+      </td> 
             </tr>`;
         });
 
-
-        
-
-
         $("#resturantData").append(resturantHtml);
         $("#productResturant").append(resturantHtml);
-        $("#resturantDataTable").append(resturantTableHtml);
+        $("#resturantDataTable").html(resturantTableHtml);
       } else {
         console.log(response.message);
       }
@@ -218,14 +308,112 @@ function getResturant() {
     },
   });
 }
-function editResturant() {
+function actionResturant(data, type) {
+  if (type == "edit") {
+    $("#idHoldEd").val(data.id);
+    $("#nameEd").val(data.name);
+    $("#emailEd").val(data.email);
+    $("#phoneEd").val(data.phone);
+    $("#addressEd").val(data.address);
+    $("#cityEd").val(data.city);
+    $("#stateEd").val(data.state);
+    $("#pincodeEd").val(data.pincode);
+    $("#minimum_order_amountEd").val(data.minimum_order_amount);
+    $("#delivery_chargeEd").val(data.delivery_charge);
+    $("#commission_percentEd").val(data.commission_percent);
+    $("#statusEd").val(data.status);
+    $("#is_openEd").val(data.is_open);
+  } else {
+    $("#id").html(data.id || "-");
+    $("#name").html(data.name || "-");
+    $("#slug").html(data.slug || "-");
+    $("#description").html(data.description || "-");
+    $("#logo").attr("src", imgUrl + data.logo || "-");
+    $("#cover_image").attr("src", imgUrl + data.cover_image || "-");
+    $("#phone").html(data.phone || "-");
+    $("#email").html(data.email || "-");
+    $("#address").html(data.address || "-");
+    $("#city").html(data.city || "-");
+    $("#state").html(data.state || "-");
+    $("#pincode").html(data.pincode || "-");
+    $("#latitude").html(data.latitude || "-");
+    $("#longitude").html(data.longitude || "-");
+    $("#opening_time").html(data.opening_time || "-");
+    $("#closing_time").html(data.closing_time || "-");
+    $("#minimum_order_amount").html(data.minimum_order_amount || "-");
+    $("#delivery_charge").html(data.delivery_charge || "-");
+    $("#commission_percent").html(data.commission_percent || "-");
+    $("#avg_rating").html(data.avg_rating || "-");
+    $("#total_reviews").html(data.total_reviews || "-");
+    $("#is_open").html(data.is_open == "1" ? "Open" : "Closed");
+    $("#status").html(data.status || "-");
+    $("#created_at").html(data.created_at || "-");
+    $("#updated_at").html(data.updated_at || "-");
+  }
+}
+function updateResturant(e) {
+  e.preventDefault();
+  const formData = new FormData();
+
+  formData.append("type", "updateResturant");
+  formData.append("id", $("#idHoldEd").val());
+  formData.append("name", $("#nameEd").val());
+  formData.append("email", $("#emailEd").val());
+  formData.append("phone", $("#phoneEd").val());
+  formData.append("address", $("#addressEd").val());
+  formData.append("city", $("#cityEd").val());
+  formData.append("state", $("#stateEd").val());
+  formData.append("pincode", $("#pincodeEd").val());
+  formData.append("minimum_order_amount", $("#minimum_order_amountEd").val());
+  formData.append("delivery_charge", $("#delivery_chargeEd").val());
+  formData.append("commission_percent", $("#commission_percentEd").val());
+  formData.append("status", $("#statusEd").val());
+  formData.append("is_open", $("#is_openEd").val());
+
+  $.ajax({
+    url: apiUrl,
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+        $("#restaurantForm")[0].reset();
+        $("#editResturantModal").modal("hide");
+        getResturant();
+      } else {
+        console.log(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.log(error);
+    },
+  });
   //code
 }
-function updateResturant() {
-  //code
-}
-function deleteResturant() {
-  //code
+function deleteResturant(data) {
+  // if (!confirm("Are you sure?")) return;
+  // alert(status);
+  // $.ajax({
+  //   url: apiUrl,
+  //   method: "POST",
+  //   dataType: "JSON",
+  //   data: {
+  //     type: "deleteResturant",
+  //     id: data.id,
+  //     status:status
+  //   },
+  //   success: function (response) {
+  //     if (response.status == "success") {
+  //       alert(response.message);
+  //       console.log(response);
+  //       getResturant();
+  //     } else {
+  //       console.log(response.message);
+  //     }
+  //   },
+  // });
 }
 
 // category crud
@@ -268,32 +456,33 @@ function getCategory() {
       console.log(response);
       if (response.status == "success") {
         console.log(response.message);
-        let i=0;
+        let i = 0;
         let categoryHtml = '<option value="">Select Category</option>';
-        let categoryTableHtml = '';
+        let categoryTableHtml = "";
         response.data.map((item) => {
+          i++;
           categoryHtml += ` <option value="${item.id}">${item.name}</option>`;
           categoryTableHtml += `
 <tr class="align-middle">
 
-    <td>${i + 1}</td>
+    <td>${i}</td>
 
     <td>${item.name}</td>
 
     <td>
-        <img src="${imgUrl+item.image}" 
+        <img src="${imgUrl + item.image}" 
              style="width:50px;height:50px;border-radius:8px;object-fit:cover;">
     </td>
 
     <td>
-        <img src="${imgUrl+item.cover_image}" 
+        <img src="${imgUrl + item.cover_image}" 
              style="width:90px;height:50px;border-radius:8px;object-fit:cover;">
     </td>
 
     <td>${item.sort_order}</td>
 
     <td>
-        <span class="badge ${item.status == 'active' ? 'bg-success' : 'bg-danger'}">
+        <span class="badge active">
             ${item.status}
         </span>
     </td>
@@ -303,17 +492,17 @@ function getCategory() {
     <td>
         <div class="action-buttons">
 
-            <a data-bs-toggle="modal" data-bs-target="#CategoryViewModal"
+            <a data-bs-toggle="modal"  onclick='actionCategory(${JSON.stringify(item)}, "view")' data-bs-target="#CategoryViewModal"
                href="#" class="action-btn view-btn">
                 <i class="ti ti-eye"></i>
             </a>
 
-            <a data-bs-toggle="modal" data-bs-target="#editCategoryModal"
+            <a data-bs-toggle="modal"  onclick='actionCategory(${JSON.stringify(item)}, "edit")' data-bs-target="#editCategoryModal"
                href="#" class="action-btn edit-btn">
                 <i class="ti ti-edit"></i>
             </a>
 
-            <a href="#" class="action-btn delete-btn">
+            <a href="#" onclick='deleteCategory(${JSON.stringify(item)})' class="action-btn delete-btn">
                 <i class="ti ti-trash"></i>
             </a>
 
@@ -333,12 +522,56 @@ function getCategory() {
     },
   });
 }
-
-function editCategory() {
-  //code
+function actionCategory(data, type) {
+  if (type == "edit") {
+    $("#idCatEd").val(data.id);
+    $("#categoryNameEd").val(data.name);
+    $("#sortOrderEd").val(data.sort_order);
+    $("#statusEd").val(data.status);
+    $("#imageEd").val(data.image);
+    $("#coverImgEd").val(data.cover_image);
+  } else {
+    $(".catNameView").html(data.name);
+    $("#sortView").html(data.sort_order);
+    $(".activeCategory").html(data.status);
+    $("#imageView").attr("src", imgUrl + data.image);
+    $("#coverImgView").attr("src", imgUrl + data.cover_image);
+  }
 }
-function updateCategory() {
-  //code
+
+function updateCategory(e) {
+  e.preventDefault();
+  const formData = new FormData();
+
+  formData.append("id", $("#idCatEd").val());
+  formData.append("name", $("#categoryNameEd").val());
+  formData.append("sort_order", $("#sortOrderEd").val());
+  formData.append("status", $("#statusEd").val());
+  formData.append("image", $("#imageEd").val() || $("#imageEd")[0].files[0]);
+  formData.append(
+    "cover_image",
+    $("#coverImgEd").val() || $("#coverImgEd")[0].files[0],
+  );
+  $.ajax({
+    url: apiUrl,
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+        $("#categoryForm")[0].reset();
+        $("#editCategoryModal").modal("hide");
+        getCategory();
+      } else {
+        console.log(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.log(error);
+    },
+  });
 }
 function deleteCategory() {
   //code
@@ -377,13 +610,72 @@ function handleCoupon(e) {
     },
   });
 }
-function editCategory() {
+function getCoupons() {
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getCoupons",
+    },
+    success: function (response) {
+      console.log(response);
+      if (response.status == "success") {
+        console.log(response.message);
+        let i = 0;
+        let couponTableHtml = "";
+        response.data.map((item) => {
+          i++;
+        couponTableHtml += `
+<tr>
+    <td>${item.id}</td>
+    <td>${item.code}</td>
+    <td>${item.discount_type}</td>
+    <td>₹${item.discount_value}</td>
+    <td>${item.start_date}</td>
+    <td>${item.end_date}</td>
+    <td>
+        <span class="status-badge ${item.status}">
+            ${item.status}
+        </span>
+    </td>
+    <td>
+        <div class="action-buttons">
+            
+
+            <a data-bs-toggle="modal"
+               data-bs-target="#viewCouponModal"
+               onclick='actionCoupon(${JSON.stringify(item)}, "view")'
+               href="#"
+               class="action-btn view-btn">
+                <i class="ti ti-eye"></i>
+            </a>
+            <a data-bs-toggle="modal"
+               data-bs-target="#editCouponModal"
+               onclick='actionCoupon(${JSON.stringify(item)}, "edit")'
+               href="#"
+               class="action-btn edit-btn">
+                <i class="ti ti-edit"></i>
+            </a>
+        </div>
+    </td>
+</tr>
+`;        });
+        $("#CouponDataTable").append(couponTableHtml);
+      } else {
+        console.log(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.log("AJAX Err : " + error);
+    },
+  });
+}
+function actionCoupon() { }
+function updateCoupon() {
   //code
 }
-function updateCategory() {
-  //code
-}
-function deleteCategory() {
+function deleteCoupon() {
   //code
 }
 
@@ -421,6 +713,80 @@ function handleProduct(e) {
     },
     error: function (xhr, status, error) {
       console.log(error);
+    },
+  });
+}
+function getOrders() {
+   $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getOrders",
+    },
+    success: function (response) {
+      console.log(response);
+      if (response.status == "success") {
+        console.log(response.message);
+        let i = 0;
+        let couponTableHtml = "";
+        response.data.map((item) => {
+          i++;
+       orderTableHtml += `
+<tr>
+    <td>${item.id}</td>
+    <td>${item.order_number}</td>
+    <td>${item.user_id}</td>
+    <td>${item.restaurant_id}</td>
+    <td>${item.address_id}</td>
+    <td>₹${item.subtotal}</td>
+    <td>₹${item.tax_amount}</td>
+    <td>₹${item.delivery_charge}</td>
+    <td>₹${item.discount_amount}</td>
+    <td>₹${item.grand_total}</td>
+    <td>${item.payment_method}</td>
+    <td>
+        <span class="status-badge ${item.payment_status}">
+            ${item.payment_status}
+        </span>
+    </td>
+    <td>
+        <span class="status-badge ${item.order_status}">
+            ${item.order_status}
+        </span>
+    </td>
+    <td>${item.notes || '-'}</td>
+    <td>${item.ordered_at || '-'}</td>
+    <td>${item.delivered_at || '-'}</td>
+    <td>${item.created_at}</td>
+    <td>
+        <div class="action-buttons">
+            <a data-bs-toggle="modal"
+               data-bs-target="#viewOrderModal"
+               onclick='actionOrder(${JSON.stringify(item)}, "view")'
+               href="#"
+               class="action-btn view-btn">
+                <i class="ti ti-eye"></i>
+            </a>
+
+            <a data-bs-toggle="modal"
+               data-bs-target="#editOrderModal"
+               onclick='actionOrder(${JSON.stringify(item)}, "edit")'
+               href="#"
+               class="action-btn edit-btn">
+                <i class="ti ti-edit"></i>
+            </a>
+        </div>
+    </td>
+</tr>
+`;     });
+        // $("#ordersDataTable").append(couponTableHtml);
+      } else {
+        console.log(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.log("AJAX Err : " + error);
     },
   });
 }

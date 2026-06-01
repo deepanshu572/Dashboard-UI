@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <title>Inventory - InApp Inventory Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon_io/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon_io/favicon-16x16.png">
   <link rel="manifest" href="./assets/images/favicon_io/site.webmanifest">
@@ -26,7 +26,7 @@
     </button>
     <div>
       <!-- Navbar nav -->
-       <ul class="list-unstyled d-flex align-items-center mb-0 gap-1">
+      <ul class="list-unstyled d-flex align-items-center mb-0 gap-1">
         <!-- Pages link -->
 
         <!-- Bell icon -->
@@ -128,9 +128,9 @@
 
   </nav>
 
-      <!-- SIDEBAR -->
+  <!-- SIDEBAR -->
   <aside id="sidebar" class="sidebar">
-     <div class="logo-area">
+    <div class="logo-area">
       <a href="index.html" class="d-inline-flex"><img src="./assets/images/logo-icon.svg" alt="" width="24">
         <span class="logo-text ms-2"> <img src="./assets/images/logo.svg" alt=""></span>
       </a>
@@ -139,105 +139,104 @@
       <li class="px-4 py-2"><small class="nav-text"></small></li>
       <li><a class="nav-link active" href="index.html"><i class="ti ti-home"></i><span
             class="nav-text">Dashboard</span></a></li>
-             <li><a class="nav-link" href="AddVendor.html" ><i class="ti ti-users"></i><span
-            class="nav-text">Vendors</span></a></li>
-             <li><a class="nav-link" href="restuarants.html" onclick="return false;"><i class="ti ti-building-store"></i><span
+      <li><a class="nav-link" href="AddVendor.html"><i class="ti ti-users"></i><span class="nav-text">Vendors</span></a>
+      </li>
+      <li><a class="nav-link" href="restuarants.html"><i class="ti ti-building-store"></i><span
             class="nav-text">Restaurant</span></a></li>
-    
-     
+
+
       <li><a class="nav-link" href="category.html" onclick="return false;"><i class="ti ti-category"></i><span
             class="nav-text">category</span></a></li>
-     
-       <li><a class="nav-link" href="AddFood.html"><i class="ti ti-salad"></i><span
-            class="nav-text">Food</span></a></li>
-     
+
+      <li><a class="nav-link" href="AddFood.html"><i class="ti ti-salad"></i><span class="nav-text">Food</span></a></li>
+
       <li><a class="nav-link" href="AddCoupons.html"><i class="ti ti-rosette-discount"></i><span
             class="nav-text">coupons</span></a></li>
-     
+
       <li><a class="nav-link" href="AddDeliveryMan.html"><i class="ti ti-truck-delivery"></i><span
             class="nav-text">delivery Man</span></a></li>
-     
-    <li><a class="nav-link" href="order.html"><i class="ti ti-receipt"></i><span class="nav-text">order</span></a>
+
+      <li><a class="nav-link" href="order.html"><i class="ti ti-receipt"></i><span class="nav-text">order</span></a>
       </li>
-   
+
       <li class="px-4 pt-4 pb-2"><small class="nav-text">Account</small></li>
       <li><a class="nav-link" href="signin.html"><i class="ti ti-logout"></i><span class="nav-text">LogOut</span></a>
       </li>
-      
+
     </ul>
 
   </aside>
 
 
   <main id="content" class="content py-10 main-content">
-       <div class="container-fluid">
-     <div class="page-header">
-    <div class="page-header-left">
+    <div class="container-fluid">
+      <div class="page-header">
+        <div class="page-header-left">
 
-        <a href="javascript:history.back()" class="back-btn">
+          <a href="javascript:history.back()" class="back-btn">
             <i class="ti ti-arrow-left"></i>
-        </a>
+          </a>
 
-        <div>
+          <div>
             <h1 class="page-title">Category</h1>
             <p class="page-subtitle">Manage your Category and account details</p>
+          </div>
+
+        </div>
+      </div>
+      <div class="table-toolbar">
+
+        <div class="search-box">
+          <i class="ti ti-search"></i>
+          <input type="text" placeholder="Search restuarants...">
         </div>
 
-    </div>
-</div>
-    <div class="table-toolbar">
+        <div class="toolbar-actions">
 
-    <div class="search-box">
-        <i class="ti ti-search"></i>
-        <input type="text" placeholder="Search restuarants...">
-    </div>
-
-    <div class="toolbar-actions">
-
-        <button class="toolbar-btn">
+          <button class="toolbar-btn">
             <i class="ti ti-filter"></i>
             Filter
-        </button>
+          </button>
 
-        <button class="toolbar-btn">
+          <button class="toolbar-btn">
             <i class="ti ti-file-excel"></i>
             Excel
-        </button>
+          </button>
 
-        <button class="toolbar-btn">
+          <button class="toolbar-btn">
             <i class="ti ti-file-pdf"></i>
             PDF
-        </button>
+          </button>
 
-    </div>
+        </div>
 
-</div>
-<div class="custom-table-card">
+      </div>
+      <div class="custom-table-card">
 
-    <div class="table-responsive">
-        <table class="table custom-table align-middle mb-0">
+        <div class="table-responsive">
+          <table class="table custom-table align-middle mb-0">
 
             <thead>
-                <tr>
+              <tr>
                 <th>S No.</th>
-<th>Category Name</th>
-<th>Image</th>
-<th>Cover Image</th>
-<th>Sort Order</th>
-<th>Status</th>
-<th>Created At</th>
-<th>Action</th>
-                </tr>
+                <th>Category Name</th>
+                <th>Image</th>
+                <th>Cover Image</th>
+                <th>Sort Order</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Action</th>
+              </tr>
             </thead>
 
             <tbody id="CategoryDataTable">
             </tbody>
 
-        </table>
-    </div>
+          </table>
+        </div>
 
-</div>
-  
+      </div>
+
 
 
 
@@ -245,147 +244,145 @@
     </div>
   </main>
 
-<div class="modal fade" id="CategoryViewModal" tabindex="-1" aria-labelledby="CategoryViewModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg vendorModal">
-    <div class="modal-content">
-     
-  <div class="modal-body">
-    <div class="vendor-profile">
+  <div class="modal fade" id="CategoryViewModal" tabindex="-1" aria-labelledby="CategoryViewModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg vendorModal">
+      <div class="modal-content">
 
-        <div class="profile-header">
+        <div class="modal-body">
+          <div class="vendor-profile">
 
-            <div class="profile-avatar">
+            <div class="profile-header">
+
+              <div class="profile-avatar">
                 🍛
+              </div>
+
+              <div class="profile-info">
+                <h2 class="catNameView"></h2>
+                <p>Food Category • <span class="activeCategory">  </span></p>
+                <span class="badge active"><span class="activeCategory">  </span> Category</span>
+              </div>
+
             </div>
 
-            <div class="profile-info">
-                <h2>Veg Biriyani</h2>
-                <p>Food Category • Active</p>
-                <span class="badge active">Active Category</span>
-            </div>
+            <div class="details-grid">
 
-        </div>
-
-        <div class="details-grid">
-
-            <div class="detail-card">
+              <div class="detail-card">
                 <span>Category Name</span>
-                <h4>Veg Biriyani</h4>
-            </div>
+                <h4 class="catNameView"></h4>
+              </div>
 
-            <div class="detail-card">
+              <div class="detail-card">
                 <span>Status</span>
-                <h4>Active</h4>
-            </div>
+                <h4 class="activeCategory"></h4>
+              </div>
 
-            <div class="detail-card">
+              <div class="detail-card">
                 <span>Sort Order</span>
-                <h4>0</h4>
-            </div>
+                <h4 id="sortView">0</h4>
+              </div>
 
-            <div class="detail-card">
+              <div class="detail-card">
                 <span>Created At</span>
-                <h4>21 May 2026</h4>
-            </div>
+                <h4 id="createdView">21 May 2026</h4>
+              </div>
 
-            <div class="detail-card">
+              <div class="detail-card">
                 <span>Image</span>
                 <h4>
-                    <img src="http://localhost/ITS_Food_Backend/admin/api/uploads/homeCat1.png"
-                         style="width:80px;height:80px;border-radius:10px;object-fit:cover;">
+                  <img id="imageView" src="" class="reuse_img">
                 </h4>
-            </div>
+              </div>
 
-            <div class="detail-card">
+              <div class="detail-card">
                 <span>Cover Image</span>
                 <h4>
-                    <img src="http://localhost/ITS_Food_Backend/admin/api/uploads/bannerCat1.jpeg"
-                         style="width:120px;height:70px;border-radius:10px;object-fit:cover;">
+                  <img id="coverImgView" src="" class="reuse_img">
                 </h4>
+              </div>
+
             </div>
 
+          </div>
         </div>
 
-    </div>
-</div>
-      
+      </div>
     </div>
   </div>
-</div>
 
-<div class="modal fade vendor-modal" id="editCategoryModal">
+  <div class="modal fade vendor-modal" id="editCategoryModal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
+      <div class="modal-content">
 
-            <div class="modal-header">
-                <h5 class="modal-title">Update Restuarant</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-<div class="modal-body">
-
-    <form id="categoryForm">
-
-        <div class="row">
-
-            <div class="col-md-6">
-                <div class="field-box">
-                    <label>Category Name</label>
-                    <input type="text" id="categoryName" class="form-control"
-                           value="Veg Biriyani">
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="field-box">
-                    <label>Sort Order</label>
-                    <input type="number" id="sortOrder" class="form-control"
-                           value="0">
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="field-box">
-                    <label>Status</label>
-                    <select id="status" class="form-select">
-                        <option selected>Active</option>
-                        <option>Inactive</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="field-box">
-                    <label>Image</label>
-                    <input type="file" class="form-control">
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="field-box">
-                    <label>Cover Image</label>
-                    <input type="file" class="form-control">
-                </div>
-            </div>
-
+        <div class="modal-header">
+          <h5 class="modal-title">Update Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
+        <div class="modal-body">
 
-        <div class="vendor-btns">
-            <button type="submit" class="btn-save">
+          <form id="categoryForm" onsubmit="updateCategory(event); return false;" class="reuse_vendor">
+
+            <div class="row">
+              <input type="text" id="idCatEd" hidden>
+
+              <div class="col-md-6">
+                <div class="field-box">
+                  <label>Category Name</label>
+                  <input type="text" id="categoryNameEd" class="form-control" value="Veg Biriyani">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="field-box">
+                  <label>Sort Order</label>
+                  <input type="number" id="sortOrderEd" class="form-control" value="0">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="field-box">
+                  <label>Status</label>
+                  <select id="statusEd" class="form-select">
+                    <option value="active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="field-box">
+                  <label>Image</label>
+                  <input type="file" id="imageEd" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="field-box">
+                  <label>Cover Image</label>
+                  <input type="file" id="coverImgEd" class="form-control">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="vendor-btns">
+              <button type="submit" class="btn-save">
                 Update Category
-            </button>
+              </button>
 
-            <button type="reset" class="btn-clear">
+              <button type="reset" class="btn-clear">
                 Clear
-            </button>
-        </div>
+              </button>
+            </div>
 
-    </form>
-
-</div>
+          </form>
 
         </div>
+
+      </div>
     </div>
-</div>
+  </div>
 
 
 
@@ -397,7 +394,7 @@
 
 
   <!-- Bootstrap JS -->
-   <script src="./assets/js/main.js" type="module"></script>
+  <script src="./assets/js/main.js" type="module"></script>
   <script src="./assets/js/jquery.js"></script>
 
   <script src="./assets/js/script.js"></script>
