@@ -1042,3 +1042,53 @@ td span{
     border-radius: 10px;
     object-fit: cover;
 }
+.order_update{
+    width: 10rem;
+    font-size: 12px;
+}
+
+.variant-list{
+    margin-top:20px;
+    border:1px solid #e5eaf1;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.variant-list h5{
+    margin:0;
+    padding:16px 20px;
+    font-size:16px;
+    font-weight:700;
+    border-bottom:1px solid #e5eaf1;
+    background:#fafbfd;
+}
+
+.variant-list table{
+    margin-bottom:0;
+}
+
+.variant-list th{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    color:#64748b;
+    padding:14px 18px;
+}
+
+.variant-list td{
+    padding:14px 18px;
+    vertical-align:middle;
+}
+
+.variant-list tr:last-child td{
+    border-bottom:none;
+}
+.flex_wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    width: 100%;
+}

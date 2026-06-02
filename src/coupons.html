@@ -247,6 +247,243 @@
   </main>
 
 
+  
+  <div class="modal fade" id="viewCouponModal" tabindex="-1" aria-labelledby="viewCouponModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg vendorModal">
+      <div class="modal-content">
+
+    <div class="modal-body">
+    <div class="vendor-profile">
+
+        <div class="profile-header">
+
+            <div class="profile-avatar">
+                🎟️
+            </div>
+
+            <div class="profile-info">
+                <h2 id="couponCodeView"></h2>
+                <p>Coupon Code • <span id="couponStatusTop"></span></p>
+                <span class="badge active">
+                    <span id="couponStatusBadge"></span> Coupon
+                </span>
+            </div>
+
+        </div>
+
+        <div class="details-grid">
+
+            <div class="detail-card">
+                <span>Coupon Code</span>
+                <h4 id="couponCodeView2"></h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Discount Type</span>
+                <h4 id="discountTypeView"></h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Discount Value</span>
+                <h4 id="discountValueView"></h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Minimum Order Amount</span>
+                <h4 id="minimumOrderView"></h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Maximum Discount Amount</span>
+                <h4 id="maxDiscountView"></h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Start Date</span>
+                <h4 id="startDateView"></h4>
+            </div>
+
+            <div class="detail-card">
+                <span>End Date</span>
+                <h4 id="endDateView"></h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Usage Limit</span>
+                <h4 id="usageLimitView"></h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Used Count</span>
+                <h4 id="usedCountView"></h4>
+            </div>
+
+            <div class="detail-card">
+                <span>Status</span>
+                <h4 id="statusView"></h4>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade vendor-modal" id="editCouponModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Update Coupon</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+
+      <form id="couponForm"
+      onsubmit="updateCoupon(event); return false;"
+      class="reuse_vendor">
+
+    <div class="row">
+
+        <input type="hidden" id="couponIdEd">
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>Coupon Code</label>
+                <input type="text"
+                       id="couponCodeEd"
+                       class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>Discount Type</label>
+
+                <select id="discountTypeEd"
+                        class="form-select">
+
+                    <option value="flat">Flat</option>
+                    <option value="percentage">Percentage</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>Discount Value</label>
+
+                <input type="number"
+                       id="discountValueEd"
+                       class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>Minimum Order Amount</label>
+
+                <input type="number"
+                       id="minimumOrderEd"
+                       class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>Maximum Discount Amount</label>
+
+                <input type="number"
+                       id="maxDiscountEd"
+                       class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>Usage Limit</label>
+
+                <input type="number"
+                       id="usageLimitEd"
+                       class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>Used Count</label>
+
+                <input type="number"
+                       id="usedCountEd"
+                       class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>Status</label>
+
+                <select id="statusEd"
+                        class="form-select">
+
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>Start Date</label>
+
+                <input type="date"
+                       id="startDateEd"
+                       class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field-box">
+                <label>End Date</label>
+
+                <input type="date"
+                       id="endDateEd"
+                       class="form-control">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="vendor-btns">
+
+        <button type="submit"
+                class="btn-save">
+            Update Coupon
+        </button>
+
+        <button type="reset"
+                class="btn-clear">
+            Clear
+        </button>
+
+    </div>
+
+</form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
   <!-- Bootstrap JS -->
   <script src="./assets/js/main.js" type="module"></script>
   <script src="./assets/js/jquery.js"></script>

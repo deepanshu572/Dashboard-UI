@@ -27,9 +27,10 @@ function handleVendor(e) {
     data: formData,
     success: function (response) {
       if (response.status == "success") {
-        console.log(response.message);
+        alert(response.message);
+        $("#addVendorForm")[0].reset();
       } else {
-        console.log(response.message);
+        alert(response.message);
       }
     },
     error: function (xhr, status, error) {
@@ -390,7 +391,6 @@ function updateResturant(e) {
       console.log(error);
     },
   });
-  //code
 }
 function deleteResturant(data) {
   // if (!confirm("Are you sure?")) return;
@@ -600,9 +600,10 @@ function handleCoupon(e) {
     data: formData,
     success: function (response) {
       if (response.status == "success") {
-        console.log(response.message);
+        alert(response.message);
+        $("#addCouponsForm")[0].reset();
       } else {
-        console.log(response.message);
+        alert(response.message);
       }
     },
     error: function (xhr, status, error) {
@@ -626,42 +627,46 @@ function getCoupons() {
         let couponTableHtml = "";
         response.data.map((item) => {
           i++;
-        couponTableHtml += `
-<tr>
-    <td>${item.id}</td>
-    <td>${item.code}</td>
-    <td>${item.discount_type}</td>
-    <td>₹${item.discount_value}</td>
-    <td>${item.start_date}</td>
-    <td>${item.end_date}</td>
-    <td>
-        <span class="status-badge ${item.status}">
-            ${item.status}
-        </span>
-    </td>
-    <td>
-        <div class="action-buttons">
-            
+          couponTableHtml += `
+        <tr>
+            <td>${i}</td>
+            <td>${item.code}</td>
+            <td>${item.discount_type}</td>
+            <td>₹${item.discount_value}</td>
+            <td>${item.start_date}</td>
+            <td>${item.end_date}</td>
+            <td>
+                <span class="status-badge ${item.status}">
+                    ${item.status}
+                </span>
+            </td>
+            <td>
+                <div class="action-buttons">
+                    
 
-            <a data-bs-toggle="modal"
-               data-bs-target="#viewCouponModal"
-               onclick='actionCoupon(${JSON.stringify(item)}, "view")'
-               href="#"
-               class="action-btn view-btn">
-                <i class="ti ti-eye"></i>
+                    <a data-bs-toggle="modal"
+                      data-bs-target="#viewCouponModal"
+                      onclick='actionCoupon(${JSON.stringify(item)}, "view")'
+                      href="#"
+                      class="action-btn view-btn">
+                        <i class="ti ti-eye"></i>
+                    </a>
+                    <a data-bs-toggle="modal"
+                      data-bs-target="#editCouponModal"
+                      onclick='actionCoupon(${JSON.stringify(item)}, "edit")'
+                      href="#"
+                      class="action-btn edit-btn">
+                        <i class="ti ti-edit"></i>
+                    </a>
+                     <a href="#" onclick='deleteCoupon(${JSON.stringify(item)})' class="action-btn delete-btn">
+                <i class="ti ti-trash"></i>
             </a>
-            <a data-bs-toggle="modal"
-               data-bs-target="#editCouponModal"
-               onclick='actionCoupon(${JSON.stringify(item)}, "edit")'
-               href="#"
-               class="action-btn edit-btn">
-                <i class="ti ti-edit"></i>
-            </a>
-        </div>
-    </td>
-</tr>
-`;        });
-        $("#CouponDataTable").append(couponTableHtml);
+                </div>
+            </td>
+        </tr>
+        `;
+        });
+        $("#CouponDataTable").html(couponTableHtml);
       } else {
         console.log(response.message);
       }
@@ -671,12 +676,117 @@ function getCoupons() {
     },
   });
 }
-function actionCoupon() { }
-function updateCoupon() {
-  //code
+function actionCoupon(item, type) {
+  if (type == "edit") {
+    $("#couponIdEd").val(item.id);
+
+    $("#couponCodeEd").val(item.code);
+
+    $("#discountTypeEd").val(item.discount_type);
+
+    $("#discountValueEd").val(item.discount_value);
+
+    $("#minimumOrderEd").val(item.minimum_order_amount);
+
+    $("#maxDiscountEd").val(item.max_discount_amount);
+
+    $("#startDateEd").val(item.start_date.split(" ")[0]);
+
+    $("#endDateEd").val(item.end_date.split(" ")[0]);
+
+    $("#usageLimitEd").val(item.usage_limit);
+
+    $("#usedCountEd").val(item.used_count);
+
+    $("#statusEd").val(item.status);
+  } else {
+    $("#couponCodeView").html(item.code);
+    $("#couponCodeView2").html(item.code);
+
+    $("#couponStatusTop").html(item.status);
+    $("#couponStatusBadge").html(item.status);
+    $("#statusView").html(item.status);
+
+    $("#discountTypeView").html(item.discount_type);
+    $("#discountValueView").html("₹" + item.discount_value);
+
+    $("#minimumOrderView").html("₹" + item.minimum_order_amount);
+    $("#maxDiscountView").html("₹" + item.max_discount_amount);
+
+    $("#startDateView").html(item.start_date);
+    $("#endDateView").html(item.end_date);
+
+    $("#usageLimitView").html(item.usage_limit);
+    $("#usedCountView").html(item.used_count);
+  }
 }
-function deleteCoupon() {
-  //code
+function updateCoupon(e) {
+  e.preventDefault();
+  const formData = new FormData();
+
+  formData.append("type", "updateCoupon");
+  formData.append("id", $("#couponIdEd").val());
+
+  formData.append("code", $("#couponCodeEd").val());
+
+  formData.append("discount_type", $("#discountTypeEd").val());
+
+  formData.append("discount_value", $("#discountValueEd").val());
+
+  formData.append("minimum_order_amount", $("#minimumOrderAmountEd").val());
+
+  formData.append("max_discount_amount", $("#maxDiscountAmountEd").val());
+
+  formData.append("usage_limit", $("#usageLimitEd").val());
+
+  formData.append("used_count", $("#usedCountEd").val());
+
+  formData.append("status", $("#statusEd").val());
+
+  formData.append("start_date", $("#startDateEd").val());
+
+  formData.append("end_date", $("#endDateEd").val());
+
+  $.ajax({
+    url: apiUrl,
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+        $("#couponForm")[0].reset();
+        $("#editCouponModal").modal("hide");
+        getCoupons();
+      } else {
+        console.log(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.log(error);
+    },
+  });
+}
+function deleteCoupon(item) {
+  if (!confirm("You want to delete this coupons ? ")) return;
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "deleteCoupon",
+      id: item.id,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+        getCoupons();
+      } else {
+        alert(response.message);
+      }
+    },
+  });
 }
 
 // food crud
@@ -716,8 +826,306 @@ function handleProduct(e) {
     },
   });
 }
+function getFoods() {
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getFoods",
+    },
+    success: function (response) {
+      console.log(response);
+      if (response.status == "success") {
+        console.log(response.message);
+        let i = 0;
+        let foodTableHtml = "";
+        response.data.map((item) => {
+          i++;
+          foodTableHtml += `
+        <tr>
+            <td>${i}</td>
+
+            <td>
+                <img src="${imgUrl + item.image}"
+                     alt="${item.name}"
+                     width="50"
+                     height="50"
+                     style="object-fit:cover;border-radius:8px;">
+            </td>
+
+            <td>${item.name}</td>
+
+            <td>${item.restaurant_id}</td>
+
+            <td>${item.category_id}</td>
+
+          
+
+            <td>₹${item.base_price}</td>
+
+            <td>₹${item.discount_price}</td>
+
+            <td>${item.preparation_time} Min</td>
+
+
+          
+
+
+
+            <td>
+                <span class="badge ${item.status === "active" ? "approved" : "reject"}">
+                    ${item.status}
+                </span>
+            </td>
+
+
+           <td>
+                <div class="action-buttons">
+                    
+
+                    <a data-bs-toggle="modal"
+                      data-bs-target="#viewFoodModal"
+                      onclick='actionFood(${JSON.stringify(item)}, "view")'
+                      href="#"
+                      class="action-btn view-btn">
+                        <i class="ti ti-eye"></i>
+                    </a>
+                    <a data-bs-toggle="modal"
+                      data-bs-target="#editFoodModal"
+                      onclick='actionFood(${JSON.stringify(item)}, "edit")'
+                      href="#"
+                      class="action-btn edit-btn">
+                        <i class="ti ti-edit"></i>
+                    </a>
+                     <a href="#" data-bs-toggle="modal"
+                      data-bs-target="#AddVarientModal"
+                      onclick='getFoodVarients(${item.id})'
+                      class="action-btn view-btn">
+                <i class="ti ti-plus"></i>
+            </a>
+                </div>
+            </td>
+        </tr>
+    `;
+        });
+        $("#FoodDataTable").append(foodTableHtml);
+      } else {
+        console.log(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.log("AJAX Err : " + error);
+    },
+  });
+}
+function getFoodVarients(id) {
+  console.log(id)
+  $("#foodItemId").val(id);
+  $("#changeBtn").html(` <button type="submit"
+                        onclick="addVariant(event); return false;"
+                                class="btn-save">
+                            Add Varient
+                        </button>`);
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getFoodVarients",
+      id,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        console.log(response.message);
+        let i = 0;
+        let FoodVarientHtml = "";
+        response.data.map((item) => {
+          i++;
+          FoodVarientHtml += `<tr>
+                <th>${i}</th>
+                <th>${item.variant_name}</th>
+                <th>${item.price}</th>
+                <th>
+                 <div class="action-buttons">  
+                    <a 
+                      onclick='editFoodVarient(${JSON.stringify(item)})'
+                      href="#"
+                      class="action-btn edit-btn">
+                        <i class="ti ti-edit"></i>
+                    </a>
+                     <a href="#" onclick='deleteVarient(${JSON.stringify(item)})' class="action-btn delete-btn">
+                <i class="ti ti-trash"></i>
+            </a>
+                </div></th>
+                </tr>`;
+               
+        });
+       
+           
+        $("#variantTableBody").html(FoodVarientHtml);
+      } else {
+        let FoodVarientHtml = "";
+        console.log(response.message);
+        FoodVarientHtml += `<div class="flex_wrap">${response.message || "not found !"}</div>`;
+        $("#variantTableBody").html(FoodVarientHtml);
+      }
+    },
+  });
+}
+function actionFood(data, type) {
+  const item = typeof data === "string" ? JSON.parse(data) : data;
+
+  if (type === "view") {
+    $("#foodNameView").html(item.name);
+    $("#foodNameView2").html(item.name);
+
+    $("#foodTypeView").html(item.food_type);
+    $("#restaurantIdView").html(item.restaurant_id);
+    $("#categoryIdView").html(item.category_id);
+
+    $("#descriptionView").html(item.description);
+
+    $("#basePriceView").html("₹" + item.base_price);
+    $("#discountPriceView").html("₹" + item.discount_price);
+
+    $("#preparationTimeView").html(item.preparation_time + " Min");
+    $("#caloriesView").html(item.calories + " Cal");
+
+    $("#recommendedView").html(item.is_recommended == 1 ? "Yes" : "No");
+
+    $("#availableView").html(
+      item.is_available == 1 ? "Available" : "Unavailable",
+    );
+
+    $("#statusView").html(item.status);
+
+    $("#imageView").attr("src", imgUrl + item.image);
+
+    $("#createdAtView").html(item.created_at);
+    $("#updatedAtView").html(item.updated_at);
+  } else if (type === "edit") {
+    $("#foodIdEd").val(item.id);
+
+    $("#restaurantIdEd").val(item.restaurant_id);
+
+    $("#categoryIdEd").val(item.category_id);
+
+    $("#foodNameEd").val(item.name);
+
+    $("#descriptionEd").val(item.description);
+
+    $("#foodTypeEd").val(item.food_type);
+
+    $("#basePriceEd").val(item.base_price);
+
+    $("#discountPriceEd").val(item.discount_price);
+
+    $("#preparationTimeEd").val(item.preparation_time);
+
+    $("#caloriesEd").val(item.calories);
+
+    $("#recommendedEd").val(item.is_recommended);
+
+    $("#availableEd").val(item.is_available);
+
+    $("#statusEd").val(item.status);
+
+    $("#previewImageEd").attr("src", imgUrl + item.image);
+  }
+}
+function editFoodVarient(item){
+  $("#variantName").val(item.variant_name)
+  $("#variantPrice").val(item.price)
+$("#changeBtn").html(`
+    <button
+        type="submit"
+        onclick="updateVarient(event, ${item.id}); return false;"
+        class="btn-save">
+        Update Variant
+    </button>
+`);
+
+}
+function addVariant() {
+  let id = $("#foodItemId").val();
+  let price = $("#variantPrice").val();
+  let name = $("#variantName").val();
+
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "addVariant",
+      id,
+      name,
+      price,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+        $("#variantForm")[0].reset();
+        getFoodVarients(id);
+      } else {
+        alert(response.message);
+      }
+    },
+  });
+}
+function updateVarient(e,varid) {
+  e.preventDefault();
+  console.log(varid)
+  let vid = varid;
+  let id = $("#foodItemId").val();
+  let price = $("#variantPrice").val();
+  let name = $("#variantName").val();
+
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "updateVarient",
+      vid,
+      name,
+      price,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+        $("#variantForm")[0].reset();
+        getFoodVarients(id);
+      } else {
+        alert(response.message);
+      }
+    },
+  });
+}
+function deleteVarient(item) {
+  if (!confirm("You want to delete this varient ? ")) return;
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "deleteVarient",
+      id: item.id,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+        getFoodVarients(item.food_item_id);
+      } else {
+        alert(response.message);
+      }
+    },
+  });
+}
+
+//order
 function getOrders() {
-   $.ajax({
+  $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -729,18 +1137,13 @@ function getOrders() {
       if (response.status == "success") {
         console.log(response.message);
         let i = 0;
-        let couponTableHtml = "";
+        let orderTableHtml = "";
         response.data.map((item) => {
           i++;
-       orderTableHtml += `
-<tr>
+          orderTableHtml += `<tr>
     <td>${item.id}</td>
     <td>${item.order_number}</td>
-    <td>${item.user_id}</td>
-    <td>${item.restaurant_id}</td>
-    <td>${item.address_id}</td>
-    <td>₹${item.subtotal}</td>
-    <td>₹${item.tax_amount}</td>
+    
     <td>₹${item.delivery_charge}</td>
     <td>₹${item.discount_amount}</td>
     <td>₹${item.grand_total}</td>
@@ -751,42 +1154,121 @@ function getOrders() {
         </span>
     </td>
     <td>
-        <span class="status-badge ${item.order_status}">
+        <span class="status-badge ${item.order_status}" id="ord${item.id}">
             ${item.order_status}
         </span>
     </td>
-    <td>${item.notes || '-'}</td>
-    <td>${item.ordered_at || '-'}</td>
-    <td>${item.delivered_at || '-'}</td>
-    <td>${item.created_at}</td>
+    <td>
+       <select class="form-select order_update"  onchange="updateOrderStatus(this)"
+        data-id="${item.id}" id="orderUpdate">
+        <option value=""></option>
+        <option value="placed">placed</option>
+        <option value="accepted">accepted</option>
+        <option value="preparing">preparing</option>
+        <option value="picked_up">picked_up</option>
+        <option value="out_for_delivery">out_for_delivery</option>
+        <option value="delivered">delivered</option>
+        <option value="cancelled">cancelled</option>
+    </select>
+    </td>
+
     <td>
         <div class="action-buttons">
             <a data-bs-toggle="modal"
-               data-bs-target="#viewOrderModal"
+               data-bs-target="#orderModal"
                onclick='actionOrder(${JSON.stringify(item)}, "view")'
                href="#"
                class="action-btn view-btn">
                 <i class="ti ti-eye"></i>
             </a>
 
-            <a data-bs-toggle="modal"
-               data-bs-target="#editOrderModal"
-               onclick='actionOrder(${JSON.stringify(item)}, "edit")'
-               href="#"
-               class="action-btn edit-btn">
-                <i class="ti ti-edit"></i>
-            </a>
+           
         </div>
     </td>
 </tr>
-`;     });
-        // $("#ordersDataTable").append(couponTableHtml);
+`;
+        });
+        $("#OrderDataTable").append(orderTableHtml);
       } else {
         console.log(response.message);
       }
     },
     error: function (xhr, status, error) {
       console.log("AJAX Err : " + error);
+    },
+  });
+}
+
+function getOrderItems(id) {
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getOrderItems",
+      id,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        let i = 0;
+        let OrderItemDataTable = "";
+        response.data.map((item) => {
+          i++;
+          OrderItemDataTable += ` <tr>
+           <td>${i}</td>
+            <td>
+                <img src="${imgUrl + item.food_image}" 
+                     alt="${item.food_name}"
+                     width="50"
+                     height="50"
+                     style="object-fit:cover;border-radius:8px;">
+            </td>
+
+            <td>${item.food_name}</td>
+
+            <td>${item.variant_name}</td>
+
+            <td>₹${item.variant_price}</td>
+
+            <td>${item.quantity}</td>
+
+            <td>₹${item.price}</td>
+
+            <td>
+                <strong>₹${item.total}</strong>
+            </td>
+        </tr>
+    `;
+        });
+
+        $("#OrderItemDataTable").html(OrderItemDataTable);
+      } else {
+        console.log(response.message);
+      }
+    },
+  });
+}
+
+function updateOrderStatus(el) {
+  const orderId = $(el).data("id");
+  const statusOrd = $(el).val();
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "orderStatusUpdate",
+      id: orderId,
+      statusOrd,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        alert("status updated !");
+        console.log(`ord${orderId}`);
+        $(`#ord${orderId}`).html(statusOrd);
+      } else {
+        console.log(response.message);
+      }
     },
   });
 }

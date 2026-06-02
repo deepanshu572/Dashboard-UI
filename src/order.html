@@ -150,7 +150,7 @@
 
       <li><a class="nav-link" href="AddFood.html"><i class="ti ti-salad"></i><span class="nav-text">Food</span></a></li>
 
-      <li><a class="nav-link" href="coupons.html"  onclick="return false;"><i class="ti ti-rosette-discount"></i><span
+      <li><a class="nav-link" href="Addcoupons.html"><i class="ti ti-rosette-discount"></i><span
             class="nav-text">coupons</span></a></li>
 
       <li><a class="nav-link" href="AddDeliveryMan.html"><i class="ti ti-truck-delivery"></i><span
@@ -178,8 +178,8 @@
           </a>
 
           <div>
-            <h1 class="page-title">Coupons</h1>
-            <p class="page-subtitle">Manage your coupons and account details</p>
+            <h1 class="page-title">Order</h1>
+            <p class="page-subtitle">Manage your Order and account details</p>
           </div>
 
         </div>
@@ -188,7 +188,7 @@
 
         <div class="search-box">
           <i class="ti ti-search"></i>
-          <input type="text" placeholder="Search Coupons...">
+          <input type="text" placeholder="Search Order...">
         </div>
 
         <div class="toolbar-actions">
@@ -218,17 +218,17 @@
 
             <thead>
               <tr>
-                <tr>
-            <th>Sno.</th>
-            <th>Order Number</th>
-            <th>Delivery Charge</th>
-            <th>Discount Amount</th>
-            <th>Grand Total</th>
-            <th>Payment Method</th>
-            <th>Payment Status</th>
-            <th>Order Status</th>
-            <th>Ordered At</th>
-            <th>Delivered At</th>
+              <tr>
+                <th>Sno.</th>
+                <th>Order Number</th>
+                <th>Delivery Charge</th>
+                <th>Discount Amount</th>
+                <th>Grand Total</th>
+                <th>Payment Method</th>
+                <th>Payment Status</th>
+                <th>Order Status</th>
+                <th>Update status</th>
+                <!--<th>Delivered At</th> -->
 
 
                 <th>Action</th>
@@ -249,6 +249,136 @@
 
     </div>
   </main>
+
+
+  <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg vendorModal">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <div class="vendor-profile">
+
+            <div class="profile-header">
+              <div class="profile-avatar" id="avatar">
+                OR
+              </div>
+
+              <div class="profile-info">
+                <h2 id="orderNumberView">#ORD1001</h2>
+                <p>Order Details</p>
+                <span class="badge active approved" id="orderStatusView">Delivered</span>
+              </div>
+            </div>
+
+            <!-- Order Information -->
+            <div class="details-grid">
+
+              <div class="detail-card">
+                <span>Order Number</span>
+                <h4 id="orderNumberView2"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>User ID</span>
+                <h4 id="userIdView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Restaurant ID</span>
+                <h4 id="restaurantIdView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Address ID</span>
+                <h4 id="addressIdView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Subtotal</span>
+                <h4 id="subtotalView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Tax Amount</span>
+                <h4 id="taxAmountView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Delivery Charge</span>
+                <h4 id="deliveryChargeView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Discount</span>
+                <h4 id="discountView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Grand Total</span>
+                <h4 id="grandTotalView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Payment Method</span>
+                <h4 id="paymentMethodView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Payment Status</span>
+                <h4 id="paymentStatusView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Ordered At</span>
+                <h4 id="orderedAtView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Delivered At</span>
+                <h4 id="deliveredAtView"></h4>
+              </div>
+
+              <div class="detail-card">
+                <span>Notes</span>
+                <h4 id="notesView"></h4>
+              </div>
+
+            </div>
+
+            <div class="table-responsive">
+              <table class="table custom-table align-middle mb-0 px-4">
+
+                <thead>
+                 
+                  <tr>
+                    <th>Sno.</th>
+                    <th>Image</th>
+                    <th>Food Name</th>
+                    <th>Variant</th>
+                    <th>Variant Price</th>
+                    <th>Quantity</th>
+                    <th>Item Price</th>
+                    <th>Total</th>
+
+
+                  </tr>
+                </thead>
+
+                <tbody id="OrderItemDataTable">
+
+                </tbody>
+
+              </table>
+            </div>
+
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 
   <!-- Bootstrap JS -->
