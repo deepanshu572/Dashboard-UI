@@ -1,6 +1,39 @@
 let apiUrl = "http://localhost/ITS_Food_Backend/admin/api/";
 let imgUrl = "http://localhost/ITS_Food_Backend/admin/";
 console.log("Done");
+const adminId = localStorage.getItem("adminId");
+const adminRole = localStorage.getItem("adminRole");
+if(adminRole[0]){
+  $('.circle').html(adminRole[0])
+}
+if (!adminId) {
+    window.location.href = "signin.html";
+}
+
+
+function dashboardCount(){
+  $.ajax({
+    url:apiUrl,
+    method:"POST",
+    dataType:"JSON",
+    data:{
+      type:"dashboardCount"
+    },
+    success: function (response) {
+      if(response.status == "success"){
+        console.log(response.data);
+        $("#userCount").html(response.data.users)
+        $("#orderCount").html(response.data.orders)
+        $("#categoryCount").html(response.data.categories)
+        $("#foodCount").html(response.data.products)
+      }
+      else{
+        console.log(response.message);
+      }
+    }
+  })
+}
+
 
 // vendor crud
 function handleVendor(e) {
@@ -34,7 +67,7 @@ function handleVendor(e) {
       }
     },
     error: function (xhr, status, error) {
-      console.log(error);
+      alert(error);
     },
   });
 }
@@ -67,6 +100,9 @@ function getVendor() {
             <td>${item.password}</td>
             <td>${item.bank_name}</td>
             <td>${item.account_number}</td>
+            <td> <span class="badge ${item.status === 'active' ? 'approved':'reject'} ">
+            ${item.status}
+        </span></td>
 
            
                  <td>
@@ -80,9 +116,14 @@ function getVendor() {
             <i class="ti ti-edit"></i>
         </a>
 
-        <a href="#" onclick='deleteVendor(${JSON.stringify(item)})' class="action-btn delete-btn">
-            <i class="ti ti-trash"></i>
-        </a>
+        <a href="#" onclick='deleteVendor(${JSON.stringify(item)},"${item.status}")' class="action-btn ${item.status === 'active' ? 'view-btn':'reject'}">
+           ${item.status === 'active'
+    ? '<i class="ti ti-lock-open"></i>'
+    : item.status === 'blocked'
+        ? '<i class="ti ti-ban"></i>'
+        : '<i class="ti ti-lock"></i>'
+}
+            </a>
 
     </div>
 </td> 
@@ -114,6 +155,7 @@ function actionVendor(data, type) {
     $("#upiId").val(data.upi_id);
     $("#gstNumber").val(data.gst_number);
     $("#panNumber").val(data.pan_number);
+    $("#statusEd").val(data.status);
   } else {
     let avatar = data.owner_name
       .split(" ")
@@ -152,6 +194,7 @@ function updateVendor(e) {
   formData.append("upi_id", $("#upiId").val());
   formData.append("gst_number", $("#gstNumber").val());
   formData.append("pan_number", $("#panNumber").val());
+  formData.append("status", $("#statusEd").val());
   $.ajax({
     url: apiUrl,
     method: "POST",
@@ -164,7 +207,7 @@ function updateVendor(e) {
         getVendor();
         alert(response.message);
       } else {
-        console.log(response.message);
+        alert(response.message);
       }
     },
   });
@@ -176,7 +219,16 @@ $("#resturantData").on("change", function () {
   $("#restaurantId").val($(this).val());
 });
 
-function deleteVendor(data) {
+function deleteVendor(data,status) {
+  console.log(status);
+ if (status == "active") {
+    status = "inactive";
+    if (!confirm("Are you sure you want to deactivate this vendor?")) return;
+} else {
+    status = "active";
+    if (!confirm("Are you sure you want to activate this vendor?")) return;
+}
+  console.log(status);
   $.ajax({
     url: apiUrl,
     method: "POST",
@@ -184,11 +236,12 @@ function deleteVendor(data) {
     data: {
       type: "deleteVendor",
       id: data.id,
+      status
     },
     success: function (response) {
       if (response.status == "success") {
         alert(response.message);
-        console.log(response);
+        getVendor();
       } else {
         console.log(response.message);
       }
@@ -232,13 +285,15 @@ function handleResturant(e) {
     contentType: false,
     success: function (response) {
       if (response.status == "success") {
-        console.log(response.message);
+      $("#addResturantForm")[0].reset();
+        alert(response.message);
+       
       } else {
-        console.log(response.message);
+        alert(response.message);
       }
     },
     error: function (xhr, status, error) {
-      console.log(error);
+      alert(error);
     },
   });
 }
@@ -259,11 +314,12 @@ function getResturant() {
         let resturantHtml = '<option value="">Select Resturant</option>';
         let resturantTableHtml = "";
         response.data.map((item) => {
+          i++;
           resturantHtml += ` <option value="${item.id}">${item.name}</option>`;
 
           resturantTableHtml += `  <tr class="align-middle " >
 
-           <td>${i + 1}</td>
+           <td>${i}</td>
           <td>${item.name}</td>
           <td>${item.address}</td>
           <td>${item.email}</td>
@@ -288,9 +344,7 @@ function getResturant() {
             <i class="ti ti-edit"></i>
         </a>
 
-         <a href="#" onclick='deleteResturant(${JSON.stringify(item)})' class="action-btn delete-btn">
-            <i class="ti ti-trash"></i>
-        </a>
+        
 
           </div>
       </td> 
@@ -324,6 +378,12 @@ function actionResturant(data, type) {
     $("#commission_percentEd").val(data.commission_percent);
     $("#statusEd").val(data.status);
     $("#is_openEd").val(data.is_open);
+    $("#openingTime").val(data.opening_time);
+    $("#deliveryCharge").val(data.delivery_charge);
+    $("#closingTime").val(data.closing_time);
+    $("#coverImage").val(data.cover_image);
+    $("#restaurantLogo").val(data.logo);
+    
   } else {
     $("#id").html(data.id || "-");
     $("#name").html(data.name || "-");
@@ -370,6 +430,10 @@ function updateResturant(e) {
   formData.append("commission_percent", $("#commission_percentEd").val());
   formData.append("status", $("#statusEd").val());
   formData.append("is_open", $("#is_openEd").val());
+  formData.append("restaurantLogo", $("#restaurantLogo")[0].files[0]);
+  formData.append("coverImage", $("#coverImage")[0].files[0]);
+   formData.append("openingTime", $("#openingTime").val());
+  formData.append("closingTime", $("#closingTime").val());
 
   $.ajax({
     url: apiUrl,
@@ -384,39 +448,48 @@ function updateResturant(e) {
         $("#editResturantModal").modal("hide");
         getResturant();
       } else {
-        console.log(response.message);
+        alert(response.message);
       }
     },
     error: function (xhr, status, error) {
-      console.log(error);
+      alert(error);
     },
   });
 }
-function deleteResturant(data) {
-  // if (!confirm("Are you sure?")) return;
-  // alert(status);
-  // $.ajax({
-  //   url: apiUrl,
-  //   method: "POST",
-  //   dataType: "JSON",
-  //   data: {
-  //     type: "deleteResturant",
-  //     id: data.id,
-  //     status:status
-  //   },
-  //   success: function (response) {
-  //     if (response.status == "success") {
-  //       alert(response.message);
-  //       console.log(response);
-  //       getResturant();
-  //     } else {
-  //       console.log(response.message);
-  //     }
-  //   },
-  // });
-}
+// function deleteResturant(data,status) {
+
+//    console.log(status);
+//  if (status == "pending") {
+//     status = "blocked";
+//     if (!confirm("Are you sure you want to deactivate this Resturant?")) return;
+// } else {
+//     status = "pending";
+//     if (!confirm("Are you sure you want to activate this Resturant?")) return;
+// }
+//   console.log(status);
+//   // $.ajax({
+//   //   url: apiUrl,
+//   //   method: "POST",
+//   //   dataType: "JSON",
+//   //   data: {
+//   //     type: "deleteResturant",
+//   //     id: data.id,
+//   //     status:status
+//   //   },
+//   //   success: function (response) {
+//   //     if (response.status == "success") {
+//   //       alert(response.message);
+//   //       console.log(response);
+//   //       getResturant();
+//   //     } else {
+//   //       console.log(response.message);
+//   //     }
+//   //   },
+//   // });
+// }
 
 // category crud
+
 function handleCategory(e) {
   e.preventDefault();
 
@@ -434,13 +507,13 @@ function handleCategory(e) {
     data: formData,
     success: function (response) {
       if (response.status == "success") {
-        console.log(response.message);
+       alert(response.message);
       } else {
-        console.log(response.message);
+       alert(response.message);
       }
     },
     error: function (xhr, status, error) {
-      console.log(error);
+     alert(error);
     },
   });
 }
@@ -482,7 +555,7 @@ function getCategory() {
     <td>${item.sort_order}</td>
 
     <td>
-        <span class="badge active">
+        <span class="badge ${item.status === 'active' ? 'approved':'reject'}">
             ${item.status}
         </span>
     </td>
@@ -502,8 +575,11 @@ function getCategory() {
                 <i class="ti ti-edit"></i>
             </a>
 
-            <a href="#" onclick='deleteCategory(${JSON.stringify(item)})' class="action-btn delete-btn">
-                <i class="ti ti-trash"></i>
+            <a href="#" onclick='deleteCategory(${JSON.stringify(item)},"${item.status}")' class="action-btn ${item.status === 'active' ? 'view-btn':'reject'}">
+             ${item.status === 'active'
+    ? '<i class="ti ti-lock-open"></i>'
+    : '<i class="ti ti-lock"></i>'
+}
             </a>
 
         </div>
@@ -511,7 +587,7 @@ function getCategory() {
 
 </tr>`;
         });
-        $("#CategoryDataTable").append(categoryTableHtml);
+        $("#CategoryDataTable").html(categoryTableHtml);
         $("#productCategory").append(categoryHtml);
       } else {
         console.log(response.message);
@@ -543,14 +619,15 @@ function updateCategory(e) {
   e.preventDefault();
   const formData = new FormData();
 
+  formData.append("type", "updateCategory");
   formData.append("id", $("#idCatEd").val());
   formData.append("name", $("#categoryNameEd").val());
   formData.append("sort_order", $("#sortOrderEd").val());
   formData.append("status", $("#statusEd").val());
-  formData.append("image", $("#imageEd").val() || $("#imageEd")[0].files[0]);
+  formData.append("image", $("#imageEd")[0].files[0]);
   formData.append(
     "cover_image",
-    $("#coverImgEd").val() || $("#coverImgEd")[0].files[0],
+     $("#coverImgEd")[0].files[0],
   );
   $.ajax({
     url: apiUrl,
@@ -573,8 +650,35 @@ function updateCategory(e) {
     },
   });
 }
-function deleteCategory() {
-  //code
+function deleteCategory(item,status) {
+ console.log(status);
+ if (status == "active") {
+    status = "inactive";
+    if (!confirm("Are you sure you want to deactivate this category?")) return;
+} else {
+    status = "active";
+    if (!confirm("Are you sure you want to activate this category?")) return;
+}
+  console.log(status);
+  
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "deleteCategory",
+      id: item.id,
+      status
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+        getCategory();
+      } else {
+        alert(response.message);
+      }
+    },
+  });
 }
 
 // Coupons crud
@@ -607,7 +711,7 @@ function handleCoupon(e) {
       }
     },
     error: function (xhr, status, error) {
-      console.log(error);
+      alert(error);
     },
   });
 }
@@ -816,13 +920,14 @@ function handleProduct(e) {
     contentType: false,
     success: function (response) {
       if (response.status == "success") {
-        console.log(response.message);
+        alert(response.message);
+         $("#addProductForm")[0].reset();
       } else {
-        console.log(response.message);
+        alert(response.message);
       }
     },
     error: function (xhr, status, error) {
-      console.log(error);
+      alert(error);
     },
   });
 }
@@ -856,9 +961,9 @@ function getFoods() {
 
             <td>${item.name}</td>
 
-            <td>${item.restaurant_id}</td>
+            <td>${item.restaurant_name}</td>
 
-            <td>${item.category_id}</td>
+            <td>${item.category_name}</td>
 
           
 
@@ -909,7 +1014,7 @@ function getFoods() {
         </tr>
     `;
         });
-        $("#FoodDataTable").append(foodTableHtml);
+        $("#FoodDataTable").html(foodTableHtml);
       } else {
         console.log(response.message);
       }
@@ -1102,6 +1207,53 @@ function updateVarient(e,varid) {
     },
   });
 }
+function updateFood(e) {
+  e.preventDefault();
+
+const formData = new FormData();
+
+formData.append("type", "updateFood");
+
+formData.append("id", $("#foodIdEd").val());
+formData.append("restaurant_id", $("#restaurantIdEd").val());
+formData.append("category_id", $("#categoryIdEd").val());
+formData.append("food_name", $("#foodNameEd").val());
+formData.append("food_type", $("#foodTypeEd").val());
+formData.append("description", $("#descriptionEd").val());
+formData.append("base_price", $("#basePriceEd").val());
+formData.append("discount_price", $("#discountPriceEd").val());
+formData.append("preparation_time", $("#preparationTimeEd").val());
+formData.append("calories", $("#caloriesEd").val());
+formData.append("recommended", $("#recommendedEd").val());
+formData.append("available", $("#availableEd").val());
+formData.append("status", $("#statusEd").val());
+const image = $("#foodImageEd")[0].files[0];
+
+if(image){
+    formData.append("food_image", image);
+}
+  $.ajax({
+    url: apiUrl,
+    type: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      if (response.status == "success") {
+        alert(response.message);
+         getFoods();
+        $("#foodEditForm")[0].reset();
+        $("#editFoodModal").modal("hide");
+       
+      } else {
+        alert(response.message);
+      }
+    },
+    error: function (xhr, status, error) {
+      alert(error);
+    },
+  });
+}
 function deleteVarient(item) {
   if (!confirm("You want to delete this varient ? ")) return;
   $.ajax({
@@ -1149,9 +1301,9 @@ function getOrders() {
     <td>₹${item.grand_total}</td>
     <td>${item.payment_method}</td>
     <td>
-        <span class="status-badge ${item.payment_status}">
-            ${item.payment_status}
-        </span>
+       <span class="status-badge badge ${item.payment_status}">
+    ${item.payment_status}
+</span>
     </td>
     <td>
         <span class="status-badge ${item.order_status}" id="ord${item.id}">
@@ -1159,24 +1311,27 @@ function getOrders() {
         </span>
     </td>
     <td>
-       <select class="form-select order_update"  onchange="updateOrderStatus(this)"
-        data-id="${item.id}" id="orderUpdate">
-        <option value=""></option>
-        <option value="placed">placed</option>
-        <option value="accepted">accepted</option>
-        <option value="preparing">preparing</option>
-        <option value="picked_up">picked_up</option>
-        <option value="out_for_delivery">out_for_delivery</option>
-        <option value="delivered">delivered</option>
-        <option value="cancelled">cancelled</option>
-    </select>
+     <select class="form-select order_update"
+        onchange="updateOrderStatus(this)"
+        data-id="${item.id}"
+        id="orderUpdate">
+
+    <option value="placed" ${item.order_status === 'placed' ? 'selected' : ''}>placed</option>
+    <option value="accepted" ${item.order_status === 'accepted' ? 'selected' : ''}>accepted</option>
+    <option value="preparing" ${item.order_status === 'preparing' ? 'selected' : ''}>preparing</option>
+    <option value="picked_up" ${item.order_status === 'picked_up' ? 'selected' : ''}>picked_up</option>
+    <option value="out_for_delivery" ${item.order_status === 'out_for_delivery' ? 'selected' : ''}>out_for_delivery</option>
+    <option value="delivered" ${item.order_status === 'delivered' ? 'selected' : ''}>delivered</option>
+    <option value="cancelled" ${item.order_status === 'cancelled' ? 'selected' : ''}>cancelled</option>
+
+</select>
     </td>
 
     <td>
         <div class="action-buttons">
             <a data-bs-toggle="modal"
                data-bs-target="#orderModal"
-               onclick='actionOrder(${JSON.stringify(item)}, "view")'
+               onclick='viewOrder(${JSON.stringify(item)}, "view")'
                href="#"
                class="action-btn view-btn">
                 <i class="ti ti-eye"></i>
@@ -1248,6 +1403,26 @@ function getOrderItems(id) {
     },
   });
 }
+function viewOrder(item) {
+  $("#orderNumberView").html(item.order_number);
+  $("#orderStatusView").html(item.order_status);
+  $("#orderNumberView2").html(item.order_number);
+$("#userIdView").html(item.user_id);
+$("#restaurantIdView").html(item.restaurant_id);
+$("#addressIdView").html(item.address_id);
+$("#subtotalView").html(item.subtotal);
+$("#taxAmountView").html(item.tax_amount);
+$("#deliveryChargeView").html(item.delivery_charge);
+$("#discountView").html(item.discount_amount);
+$("#grandTotalView").html(item.grand_total);
+$("#paymentMethodView").html(item.payment_method);
+$("#paymentStatusView").html(item.payment_status);
+$("#orderedAtView").html(item.ordered_at);
+$("#deliveredAtView").html(item.delivered_at);
+$("#notesView").html(item.notes);
+  getOrderItems(item.id);
+  
+}
 
 function updateOrderStatus(el) {
   const orderId = $(el).data("id");
@@ -1271,4 +1446,13 @@ function updateOrderStatus(el) {
       }
     },
   });
+}
+
+
+function logout() {
+    localStorage.removeItem("adminId");
+    localStorage.removeItem("adminRole");
+    localStorage.removeItem("adminName");
+
+    window.location.href = "signin.html";
 }

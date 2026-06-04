@@ -2,532 +2,490 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <title>Inventory - InApp Inventory Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon_io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon_io/favicon-16x16.png">
-  <link rel="manifest" href="./assets/images/favicon_io/site.webmanifest">
+    <meta charset="UTF-8" />
+    <title>Inventory - InApp Inventory Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="./assets/images/favicon_io/site.webmanifest">
 
 </head>
 
 <body>
-  <div id="overlay" class="overlay"></div>
-  <!-- TOPBAR -->
-  <nav id="topbar" class="navbar bg-white border-bottom fixed-top topbar px-3">
-    <button id="toggleBtn" class="d-none d-lg-inline-flex btn btn-light btn-icon btn-sm ">
-      <i class="ti ti-layout-sidebar-left-expand"></i>
-    </button>
+    <div id="overlay" class="overlay"></div>
+    <!-- TOPBAR -->
+    <nav id="topbar" class="navbar bg-white border-bottom fixed-top topbar px-3">
+        <button id="toggleBtn" class="d-none d-lg-inline-flex btn btn-light btn-icon btn-sm ">
+            <i class="ti ti-layout-sidebar-left-expand"></i>
+        </button>
 
-    <!-- MOBILE -->
-    <button id="mobileBtn" class="btn btn-light btn-icon btn-sm d-lg-none me-2">
-      <i class="ti ti-layout-sidebar-left-expand"></i>
-    </button>
-    <div>
-      <!-- Navbar nav -->
-       <ul class="list-unstyled d-flex align-items-center mb-0 gap-1">
-        <!-- Pages link -->
+        <!-- MOBILE -->
+        <button id="mobileBtn" class="btn btn-light btn-icon btn-sm d-lg-none me-2">
+            <i class="ti ti-layout-sidebar-left-expand"></i>
+        </button>
+        <div>
+             <div class="profile-wrapper">
 
-        <!-- Bell icon -->
-        <li>
-          <a class="position-relative btn-icon btn-sm btn-light btn rounded-circle" data-bs-toggle="dropdown"
-            aria-expanded="false" href="#" role="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-bell">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
-              <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
-            </svg>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger mt-2 ms-n2">
-              2
-              <span class="visually-hidden">unread messages</span>
-            </span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end dropdown-menu-md p-0">
-            <ul class="list-unstyled p-0 m-0">
-              <li class="p-3 border-bottom ">
-                <div class="d-flex gap-3">
-                  <img src="./assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-sm rounded-circle" />
-                  <div class="flex-grow-1 small">
-                    <p class="mb-0">New order received</p>
-                    <p class="mb-1">Order #12345 has been placed</p>
-                    <div class="text-secondary">5 minutes ago</div>
-                  </div>
-                </div>
-              </li>
-              <li class="p-3 border-bottom ">
-                <div class="d-flex gap-3">
-                  <img src="./assets/images/avatar/avatar-4.jpg" alt="" class="avatar avatar-sm rounded-circle" />
-                  <div class="flex-grow-1 small">
-                    <p class="mb-0">New user registered</p>
-                    <p class="mb-1">User @john_doe has signed up</p>
-                    <div class="text-secondary">30 minutes ago</div>
-                  </div>
-              </li>
-
-              <li class="p-3 border-bottom">
-                <div class="d-flex gap-3">
-                  <img src="./assets/images/avatar/avatar-2.jpg" alt="" class="avatar avatar-sm rounded-circle" />
-                  <div class="flex-grow-1 small">
-                    <p class="mb-0">Payment confirmed</p>
-                    <p class="mb-1">Payment of $299 has been received</p>
-                    <div class="text-secondary">1 hour ago</div>
-                  </div>
-                </div>
-              </li>
-              <li class="px-4 py-3 text-center">
-                <a href="#" class="text-primary ">View all notifications</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <!-- Dropdown -->
-        <li class="ms-3 dropdown">
-          <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="./assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-sm rounded-circle" />
-          </a>
-          <div class="dropdown-menu dropdown-menu-end p-0" style="min-width: 200px;">
-            <div>
-              <div class="d-flex gap-3 align-items-center border-dashed border-bottom px-3 py-3">
-                <img src="./assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle" />
-                <div>
-                  <h4 class="mb-0 small">Shrina Tesla</h4>
-                  <p class="mb-0  small">@imshrina</p>
-                </div>
-              </div>
-              <div class="p-3 d-flex flex-column gap-1 small lh-lg">
-                <a href="#!" class="">
-
-                  <span>Home</span>
-                </a>
-                <a href="#!" class="">
-
-                  <span> Inbox</span>
-                </a>
-                <a href="#!" class="">
-
-                  <span> Chat</span>
-                </a>
-                <a href="#!" class="">
-
-                  <span> Activity</span>
-                </a>
-                <a href="#!" class="">
-
-                  <span> Account Settings</span>
-                </a>
-              </div>
-
-            </div>
-          </div>
-        </li>
-      </ul>
+    <div class="circle" >
+        A
     </div>
 
-  </nav>
+   
 
-      <!-- SIDEBAR -->
-  <aside id="sidebar" class="sidebar">
-     <div class="logo-area">
-      <a href="index.html" class="d-inline-flex"><img src="./assets/images/logo-icon.svg" alt="" width="24">
-        <span class="logo-text ms-2"> <img src="./assets/images/logo.svg" alt=""></span>
-      </a>
-    </div>
-    <ul class="nav flex-column">
+   </div>
+        </div>
+
+    </nav>
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+        <div class="logo-area">
+            <a href="index.html" class="d-inline-flex"><img src="./assets/images/logo-icon.svg" alt="" width="24">
+                <span class="logo-text ms-2"> <img src="./assets/images/logo.svg" alt=""></span>
+            </a>
+        </div>
+       <ul class="nav flex-column">
       <li class="px-4 py-2"><small class="nav-text"></small></li>
       <li><a class="nav-link active" href="index.html"><i class="ti ti-home"></i><span
             class="nav-text">Dashboard</span></a></li>
-             <li><a class="nav-link" href="AddVendor.html" ><i class="ti ti-users"></i><span
+             <li><a class="nav-link" href="vendors.html"><i class="ti ti-users"></i><span
             class="nav-text">Vendors</span></a></li>
-             <li><a class="nav-link" href="restuarants.html" onclick="return false;"><i class="ti ti-building-store"></i><span
+             <li><a class="nav-link" href="restuarants.html"><i class="ti ti-building-store"></i><span
             class="nav-text">Restaurant</span></a></li>
     
      
-      <li><a class="nav-link" href="AddCategory.html"><i class="ti ti-category"></i><span
+      <li><a class="nav-link" href="category.html"><i class="ti ti-category"></i><span
             class="nav-text">category</span></a></li>
      
-       <li><a class="nav-link" href="AddFood.html"><i class="ti ti-salad"></i><span
+       <li><a class="nav-link" href="foods.html"><i class="ti ti-salad"></i><span
             class="nav-text">Food</span></a></li>
      
-      <li><a class="nav-link" href="AddCoupons.html"><i class="ti ti-rosette-discount"></i><span
+      <li><a class="nav-link" href="coupons.html"><i class="ti ti-rosette-discount"></i><span
             class="nav-text">coupons</span></a></li>
      
       <li><a class="nav-link" href="AddDeliveryMan.html"><i class="ti ti-truck-delivery"></i><span
             class="nav-text">delivery Man</span></a></li>
      
-    <li><a class="nav-link" href="order.html"><i class="ti ti-receipt"></i><span class="nav-text">order</span></a>
+    <li><a class="nav-link" href="order.html"><i class="ti ti-receipt"></i><span class="nav-text">orders</span></a>
       </li>
    
       <li class="px-4 pt-4 pb-2"><small class="nav-text">Account</small></li>
-      <li><a class="nav-link" href="signin.html"><i class="ti ti-logout"></i><span class="nav-text">LogOut</span></a>
+      <li><a class="nav-link" href="#" onclick="logout()"><i class="ti ti-logout"></i><span class="nav-text">LogOut</span></a>
       </li>
       
     </ul>
 
-  </aside>
+    </aside>
 
 
-  <main id="content" class="content py-10 main-content">
-       <div class="container-fluid">
-     <div class="page-header">
-    <div class="page-header-left">
+    <main id="content" class="content py-10 main-content">
+        <div class="container-fluid">
+            <div class="page-header">
+                <div class="page-header-left">
 
-        <a href="javascript:history.back()" class="back-btn">
-            <i class="ti ti-arrow-left"></i>
-        </a>
+                   
 
-        <div>
-            <h1 class="page-title">Restaurant</h1>
-            <p class="page-subtitle">Manage your Restaurant and account details</p>
-        </div>
+                    <div>
+                        <h1 class="page-title">Restaurant</h1>
+                        <p class="page-subtitle">Manage your Restaurant and account details</p>
+                    </div>
 
-    </div>
-</div>
-    <div class="table-toolbar">
+                </div>
+                 <a href="AddResturant.html" class="btn btn-primary">
+        <i class="ti ti-list me-1"></i>
+        Add Restaurant
+    </a>
+            </div>
+            <div class="table-toolbar">
 
-    <div class="search-box">
-        <i class="ti ti-search"></i>
-        <input type="text" placeholder="Search restuarants...">
-    </div>
+                <div class="search-box">
+                    <i class="ti ti-search"></i>
+                    <input type="text" placeholder="Search restuarants...">
+                </div>
 
-    <div class="toolbar-actions">
+                <div class="toolbar-actions">
 
-        <button class="toolbar-btn">
-            <i class="ti ti-filter"></i>
-            Filter
-        </button>
+                    <button class="toolbar-btn">
+                        <i class="ti ti-filter"></i>
+                        Filter
+                    </button>
 
-        <button class="toolbar-btn">
-            <i class="ti ti-file-excel"></i>
-            Excel
-        </button>
+                    <button class="toolbar-btn">
+                        <i class="ti ti-file-excel"></i>
+                        Excel
+                    </button>
 
-        <button class="toolbar-btn">
-            <i class="ti ti-file-pdf"></i>
-            PDF
-        </button>
+                    <button class="toolbar-btn">
+                        <i class="ti ti-file-pdf"></i>
+                        PDF
+                    </button>
 
-    </div>
+                </div>
 
-</div>
-<div class="custom-table-card">
+            </div>
+            <div class="custom-table-card">
 
-    <div class="table-responsive">
-        <table class="table custom-table align-middle mb-0">
+                <div class="table-responsive">
+                    <table class="table custom-table align-middle mb-0">
 
-            <thead>
-                <tr>
-                  <th>S No.</th>
-<th>Restaurant Name</th>
-<th>Address</th>
-<th>Email</th>
-<th>Phone</th>
-<th>City</th>
-<th>State</th>
-<th>Pincode</th>
-<th>Status</th>
-<th>Action</th>
-                </tr>
-            </thead>
+                        <thead>
+                            <tr>
+                                <th>S No.</th>
+                                <th>Restaurant Name</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Pincode</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
 
-            <tbody id="resturantDataTable">
-            </tbody>
+                        <tbody id="resturantDataTable">
+                        </tbody>
 
-        </table>
-    </div>
+                    </table>
+                </div>
 
-</div>
-  
-
-
-
-
-    </div>
-  </main>
-
-<div class="modal fade" id="ResturantViewModal" tabindex="-1" aria-labelledby="ResturantViewModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg vendorModal">
-    <div class="modal-content">
-     
-    <div class="modal-body">
-    <div class="vendor-profile">
-
-        <div class="profile-header">
-            <div class="profile-avatar">
-                SG
             </div>
 
-            <div class="profile-info">
-                <h2>Spice Garden Bistro</h2>
-                <p>Restaurant • Ranchi</p>
-                <span class="badge active">Open Now</span>
+
+
+
+
+        </div>
+    </main>
+
+    <div class="modal fade" id="ResturantViewModal" tabindex="-1" aria-labelledby="ResturantViewModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg vendorModal">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="vendor-profile">
+
+                        <div class="profile-header">
+                            <div class="profile-avatar">
+                                SG
+                            </div>
+
+                            <div class="profile-info">
+                                <h2>Spice Garden Bistro</h2>
+                                <p>Restaurant • Ranchi</p>
+                                <span class="badge active">Open Now</span>
+                            </div>
+                        </div>
+
+                        <div class="details-grid">
+
+                            <div class="detail-card">
+                                <span>id</span>
+                                <h4 id="id"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>name</span>
+                                <h4 id="name"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>slug</span>
+                                <h4 id="slug"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>description</span>
+                                <h4 id="description"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>logo</span>
+                                <img class="reuse_img" src="" id="logo" />
+                            </div>
+
+                            <div class="detail-card">
+                                <span>cover_image</span>
+                                <img class="reuse_img" src="" id="cover_image" />
+                            </div>
+
+                            <div class="detail-card">
+                                <span>phone</span>
+                                <h4 id="phone"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>email</span>
+                                <h4 id="email"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>address</span>
+                                <h4 id="address"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>city</span>
+                                <h4 id="city"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>state</span>
+                                <h4 id="state"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>pincode</span>
+                                <h4 id="pincode"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>latitude</span>
+                                <h4 id="latitude"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>longitude</span>
+                                <h4 id="longitude"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>opening_time</span>
+                                <h4 id="opening_time"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>closing_time</span>
+                                <h4 id="closing_time"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>minimum_order_amount</span>
+                                <h4 id="minimum_order_amount"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>delivery_charge</span>
+                                <h4 id="delivery_charge"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>commission_percent</span>
+                                <h4 id="commission_percent"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>avg_rating</span>
+                                <h4 id="avg_rating"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>total_reviews</span>
+                                <h4 id="total_reviews"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>is_open</span>
+                                <h4 id="is_open"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>status</span>
+                                <h4 id="status"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>created_at</span>
+                                <h4 id="created_at"></h4>
+                            </div>
+
+                            <div class="detail-card">
+                                <span>updated_at</span>
+                                <h4 id="updated_at"></h4>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
-
-      <div class="details-grid">
-
-    <div class="detail-card">
-        <span>id</span>
-        <h4 id="id"></h4>
     </div>
 
-    <div class="detail-card">
-        <span>name</span>
-        <h4 id="name"></h4>
-    </div>
+    <div class="modal fade vendor-modal" id="editResturantModal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
 
-    <div class="detail-card">
-        <span>slug</span>
-        <h4 id="slug"></h4>
-    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Restuarant</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
 
-    <div class="detail-card">
-        <span>description</span>
-        <h4 id="description"></h4>
-    </div>
+                    <form id="restaurantForm" onsubmit="updateResturant(event); return false;"
+                        class="admin-form reuse_vendor">
 
-    <div class="detail-card">
-        <span>logo</span>
-        <img class="reuse_img" src="" id="logo"/>
-    </div>
+                        <div class="row">
 
-    <div class="detail-card">
-        <span>cover_image</span>
-        <img class="reuse_img" src="" id="cover_image"/>
-    </div>
+                            <input type="text" id="idHoldEd" class="form-control" hidden>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label for="name">name</label>
+                                    <input type="text" id="nameEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>phone</span>
-        <h4 id="phone"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>email</label>
+                                    <input type="email" id="emailEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>email</span>
-        <h4 id="email"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>phone</label>
+                                    <input type="text" id="phoneEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>address</span>
-        <h4 id="address"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>address</label>
+                                    <input type="text" id="addressEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>city</span>
-        <h4 id="city"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>city</label>
+                                    <input type="text" id="cityEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>state</span>
-        <h4 id="state"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>state</label>
+                                    <input type="text" id="stateEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>pincode</span>
-        <h4 id="pincode"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>pincode</label>
+                                    <input type="text" id="pincodeEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>latitude</span>
-        <h4 id="latitude"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>minimum_order_amount</label>
+                                    <input type="number" id="minimum_order_amountEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>longitude</span>
-        <h4 id="longitude"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>delivery_charge</label>
+                                    <input type="number" id="delivery_chargeEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>opening_time</span>
-        <h4 id="opening_time"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>commission_percent</label>
+                                    <input type="number" id="commission_percentEd" class="form-control">
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>closing_time</span>
-        <h4 id="closing_time"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>status</label>
+                                    <select id="statusEd" class="form-select">
+                                        <option value="approved">Approved</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="rejected">Rejected</option>
+                                        <option value="blocked">blocked</option>
+                                    </select>
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>minimum_order_amount</span>
-        <h4 id="minimum_order_amount"></h4>
-    </div>
+                            <div class="col-md-6">
+                                <div class="field-box">
+                                    <label>is_open</label>
+                                    <select id="is_openEd" class="form-select">
+                                        <option value="1">Open</option>
+                                        <option value="0">Closed</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Opening Time -->
+                            <div class="col-md-6 mb-3">
+                                <label for="openingTime" class="form-label">Opening Time</label>
+                                <input type="time" class="form-control" id="openingTime">
+                            </div>
 
-    <div class="detail-card">
-        <span>delivery_charge</span>
-        <h4 id="delivery_charge"></h4>
-    </div>
+                            <!-- Closing Time -->
+                            <div class="col-md-6 mb-3">
+                                <label for="closingTime" class="form-label">Closing Time</label>
+                                <input type="time" class="form-control" id="closingTime">
+                            </div>
 
-    <div class="detail-card">
-        <span>commission_percent</span>
-        <h4 id="commission_percent"></h4>
-    </div>
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                           Edit image (optional)
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                            <!-- Logo -->
+                                            <div class="col-md-6 mb-3">
+                                                <label for="restaurantLogo" class="form-label">Logo</label>
+                                                <input type="file" class="form-control" id="restaurantLogo">
+                                            </div>
 
-    <div class="detail-card">
-        <span>avg_rating</span>
-        <h4 id="avg_rating"></h4>
-    </div>
+                                            <!-- Cover Image -->
+                                            <div class="col-md-6 mb-3">
+                                                <label for="coverImage" class="form-label">Cover Image</label>
+                                                <input type="file" class="form-control" id="coverImage">
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-    <div class="detail-card">
-        <span>total_reviews</span>
-        <h4 id="total_reviews"></h4>
-    </div>
 
-    <div class="detail-card">
-        <span>is_open</span>
-        <h4 id="is_open"></h4>
-    </div>
 
-    <div class="detail-card">
-        <span>status</span>
-        <h4 id="status"></h4>
-    </div>
+                        </div>
 
-    <div class="detail-card">
-        <span>created_at</span>
-        <h4 id="created_at"></h4>
-    </div>
+                        <div class="vendor-btns">
+                            <button type="submit" class="btn-save">
+                                Update Restaurant
+                            </button>
 
-    <div class="detail-card">
-        <span>updated_at</span>
-        <h4 id="updated_at"></h4>
-    </div>
+                            <button type="reset" class="btn-clear">
+                                Reset
+                            </button>
+                        </div>
 
-</div>
+                    </form>
 
-    </div>
-</div>
-      
-    </div>
-  </div>
-</div>
+                </div>
 
-<div class="modal fade vendor-modal" id="editResturantModal">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title">Update Restuarant</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-<div class="modal-body">
-
-    <form id="restaurantForm" onsubmit="updateResturant(event); return false;" class="admin-form reuse_vendor">
-
-       <div class="row">
-
-  <input type="text" id="idHoldEd" class="form-control" hidden>
-    <div class="col-md-6">
-        <div class="field-box">
-            <label for="name">name</label>
-            <input type="text" id="nameEd" class="form-control">
         </div>
     </div>
 
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>email</label>
-            <input type="email" id="emailEd" class="form-control">
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>phone</label>
-            <input type="text" id="phoneEd" class="form-control">
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>address</label>
-            <input type="text" id="addressEd" class="form-control">
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>city</label>
-            <input type="text" id="cityEd" class="form-control">
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>state</label>
-            <input type="text" id="stateEd" class="form-control">
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>pincode</label>
-            <input type="text" id="pincodeEd" class="form-control">
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>minimum_order_amount</label>
-            <input type="number" id="minimum_order_amountEd" class="form-control">
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>delivery_charge</label>
-            <input type="number" id="delivery_chargeEd" class="form-control">
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>commission_percent</label>
-            <input type="number" id="commission_percentEd" class="form-control">
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>status</label>
-            <select id="statusEd" class="form-select">
-                <option value="approved">Approved</option>
-                <option value="pending">Pending</option>
-                <option value="rejected">Rejected</option>
-                <option value="blocked">blocked</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-        <div class="field-box">
-            <label>is_open</label>
-            <select id="is_openEd" class="form-select">
-                <option value="1">Open</option>
-                <option value="0">Closed</option>
-            </select>
-        </div>
-    </div>
-
-</div>
-
-        <div class="vendor-btns">
-            <button type="submit" class="btn-save">
-                Update Restaurant
-            </button>
-
-            <button type="reset" class="btn-clear">
-                Reset
-            </button>
-        </div>
-
-    </form>
-
-</div>
-
-        </div>
-    </div>
-</div>
 
 
 
@@ -537,15 +495,14 @@
 
 
 
+    <!-- Bootstrap JS -->
+    <script src="./assets/js/main.js" type="module"></script>
+    <script src="./assets/js/jquery.js"></script>
 
-  <!-- Bootstrap JS -->
-   <script src="./assets/js/main.js" type="module"></script>
-  <script src="./assets/js/jquery.js"></script>
-
-  <script src="./assets/js/script.js"></script>
-  <script>
-    getResturant();
-  </script>
+    <script src="./assets/js/script.js"></script>
+    <script>
+        getResturant();
+    </script>
 </body>
 
 </html>

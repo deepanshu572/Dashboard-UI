@@ -18,7 +18,7 @@
 
 
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
-  <div class="card " style="max-width:420px; width:100%;">
+  <div class="card login-form " style="max-width:420px; width:100%;">
     <div class="card-body p-5">
       <div class="text-center mb-3">
       <a href="index.html" class="mb-4 d-inline-block"><img src="./assets/images/logo-icon.svg" alt="" width="36">
@@ -28,20 +28,17 @@
 
       </div>
 
-      <form class="needs-validation mt-3" novalidate>
+      <form class="needs-validation mt-3 " onsubmit="handleLogin(event); return false;">
         <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input id="email" type="email" class="form-control" placeholder="name@example.com" required autofocus>
-          <div class="invalid-feedback">Please enter a valid email.</div>
+          <label for="name" class="form-label">userName</label>
+          <input id="name" type="name" class="form-control" placeholder="admin" required autofocus>
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label d-flex justify-content-between">
             <span>Password</span>
-            <a href="#" class="small link-primary">Forgot Password?</a>
           </label>
           <input id="password" type="password" class="form-control" placeholder="Password" required minlength="6">
-          <div class="invalid-feedback">Please provide a password (min 6 characters).</div>
         </div>
 
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -54,9 +51,7 @@
         <button class="btn btn-primary w-100" type="submit">Sign in</button>
       </form>
 
-      <div class="text-center mt-3 small text-muted">
-        Don't have an account? <a href="signup.html"  class="link-primary">Sign up</a>
-      </div>
+     
     </div>
   </div>
 </div>
@@ -65,8 +60,48 @@
 
   <!-- Bootstrap JS -->
   <script src="./assets/js/main.js" type="module"></script>
+<script src="./assets/js/jquery.js"></script>
 
+<script>
+  let apiUrl = "http://localhost/ITS_Food_Backend/admin/api/";
+function handleLogin(e){
+ e.preventDefault();
+  let name = $("#name").val();
+  let password = $("#password").val();
+ 
+  $.ajax({
+    url:apiUrl,
+    method:"POST",
+    dataType:"JSON",
+    data:{
+      type:"handleLogin",
+      name,
+      password,
+      role:"super_admin"
+    },
+    success:function (response) {
+       if(response.status === "success"){
 
+    localStorage.setItem("adminId", response.data.id);
+    localStorage.setItem("adminRole", response.data.role);
+    localStorage.setItem("adminName", response.data.name);
+
+    alert("Login Success");
+    location.href="index.html"
+}
+else{
+         alert(response.message);
+       }
+    },
+    error: function (xhr,status,err) {
+      alert("AJAX ERR:"+ err)
+      
+    }
+  })
+
+}
+
+</script>
 </body>
 
 </html>""
